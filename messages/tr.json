@@ -1,0 +1,102 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "about": "Hakkımızda",
+    "activities": "Faaliyetler",
+    "news": "Gündem",
+    "articles": "Makaleler",
+    "scholars": "Hocalarımız",
+    "contact": "İletişim"
+  },
+  "hero": {
+    "badge": "İslami Davet Vakfı",
+    "title1": "İslam'ı Anlatmak,",
+    "title2": "İnsanlığa Hizmet Etmek",
+    "subtitle": "Hakikat yolunda ilim, irşat ve davet faaliyetleriyle insanlığa rehberlik eden köklü bir sivil toplum kuruluşu.",
+    "cta1": "Faaliyetlerimiz",
+    "cta2": "Bizi Tanıyın",
+    "scrollDown": "Aşağı Kaydır"
+  },
+  "stats": {
+    "years": "Yıllık Deneyim",
+    "projects": "Tamamlanan Proje",
+    "members": "Aktif Üye",
+    "publications": "Yayın"
+  },
+  "about": {
+    "tag": "Hakkımızda",
+    "title": "Davet Yolunda Köklü Bir Kuruluş",
+    "desc1": "İslami Davet Vakfı, 2009 yılından bu yana Türkiye'de ve dünyada İslam'ın doğru anlaşılmasına katkı sağlamak amacıyla faaliyet göstermektedir.",
+    "desc2": "Vakfımız; ilmi çalışmalar, yayıncılık faaliyetleri ve toplumsal hizmet projeleriyle binlerce insanın hayatına dokunmaktadır.",
+    "desc3": "Kurumsal yapımız, şeffaf yönetim anlayışımız ve köklü akademik birikimimizle güvenilir bir sivil toplum kuruluşu olarak öne çıkmaktayız.",
+    "learnMore": "Daha Fazla Bilgi",
+    "feature1Title": "İlim & İrşat",
+    "feature1Desc": "Akademik çalışmalar ve din eğitimiyle toplumu aydınlatıyoruz.",
+    "feature2Title": "Yayın & Eğitim",
+    "feature2Desc": "Kitap, dergi ve dijital içeriklerle bilgiyi yayıyoruz.",
+    "feature3Title": "Toplumsal Hizmet",
+    "feature3Desc": "Sosyal projeler ve yardım faaliyetleriyle insanlığa hizmet ediyoruz."
+  },
+  "sections": {
+    "latestNews": "Son Gündem",
+    "allNews": "Tümünü Gör",
+    "featuredArticles": "Öne Çıkan Makaleler",
+    "ourScholars": "Hocalarımız",
+    "activities": "Faaliyetlerimiz",
+    "readMore": "Devamını Oku",
+    "viewAll": "Tümünü Gör",
+    "contactCTATitle": "Davet Yolunda Birlikte Yürüyelim",
+    "contactCTADesc": "Vakfımız hakkında bilgi almak, faaliyetlerimize katılmak veya destek olmak için bizimle iletişime geçin.",
+    "contactCTABtn": "İletişime Geçin"
+  },
+  "activities": {
+    "education": "Eğitim",
+    "educationDesc": "İlmi kurslar, seminerler ve akademik programlar",
+    "publishing": "Yayıncılık",
+    "publishingDesc": "Kitap, dergi ve dijital yayınlar",
+    "irsat": "İrşat",
+    "irsatDesc": "Hutbe, vaaz ve irşat hizmetleri",
+    "social": "Sosyal Hizmet",
+    "socialDesc": "Yardım projeleri ve toplumsal hizmetler",
+    "international": "Uluslararası",
+    "internationalDesc": "Dünya genelinde davet faaliyetleri"
+  },
+  "footer": {
+    "quickLinks": "Hızlı Linkler",
+    "contact": "İletişim",
+    "latestPosts": "Son Yazılar",
+    "address": "Fatih, İstanbul, Türkiye",
+    "phone": "+90 212 000 00 00",
+    "email": "info@idvakfi.org",
+    "copyright": "© 2024 İslami Davet Vakfı. Tüm hakları saklıdır.",
+    "privacy": "Gizlilik Politikası",
+    "shortDesc": "Hakikat yolunda ilim, irşat ve davet faaliyetleriyle insanlığa hizmet eden sivil toplum kuruluşu."
+  },
+  "article": {
+    "readingTime": "dk okuma",
+    "author": "Yazar",
+    "publishedAt": "Yayın tarihi",
+    "share": "Paylaş",
+    "relatedArticles": "İlgili Makaleler",
+    "tableOfContents": "İçindekiler",
+    "copyLink": "Linki Kopyala",
+    "copied": "Kopyalandı!"
+  },
+  "contact": {
+    "title": "İletişim",
+    "subtitle": "Bizimle iletişime geçin",
+    "name": "Ad Soyad",
+    "email": "E-posta",
+    "phone": "Telefon",
+    "subject": "Konu",
+    "message": "Mesaj",
+    "send": "Gönder",
+    "subjects": {
+      "general": "Genel",
+      "membership": "Üyelik",
+      "project": "Proje",
+      "media": "Medya",
+      "other": "Diğer"
+    }
+  }
+}
