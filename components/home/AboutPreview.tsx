@@ -44,15 +44,16 @@ export default function AboutPreview() {
               <div className="absolute w-80 h-80 rounded-full bg-brand-tealLight opacity-40" />
               {/* Islamic pattern overlay */}
               <div className="relative w-72 h-72 rounded-full overflow-hidden border-2 border-brand-teal/20 bg-brand-tealLight flex items-center justify-center">
-                <IslamicPattern opacity={0.2} color="#0023de" size={70} className="!relative inset-auto w-full h-full" />
-                {/* Center logo */}
+                <IslamicPattern opacity={0.2} color="var(--color-brand-teal)" size={70} className="!relative inset-auto w-full h-full" />
+                {/* Center logo placeholder */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-32 h-32 rounded-full bg-brand-navy flex items-center justify-center shadow-2xl p-6 overflow-hidden border border-white/10">
-                    <img
-                      src="/logo-icon.png?v=3"
-                      alt="Uluslararası İslami Davet Vakfı Logo"
-                      className="w-full h-full object-contain"
-                    />
+                  <div className="w-32 h-32 rounded-full bg-brand-navy/90 flex items-center justify-center shadow-2xl">
+                    <svg viewBox="0 0 80 80" className="w-20 h-20" fill="none">
+                      <polygon points="40,5 65,20 70,48 55,70 25,70 10,48 15,20" stroke="var(--color-brand-teal)" strokeWidth="2" fill="none" />
+                      <polygon points="40,18 57,28 60,48 50,62 30,62 20,48 23,28" stroke="var(--color-brand-gold)" strokeWidth="1.5" fill="none" />
+                      <circle cx="40" cy="40" r="10" stroke="var(--color-brand-teal)" strokeWidth="2" fill="rgba(0,35,222,0.2)" />
+                      <circle cx="40" cy="40" r="4" fill="var(--color-brand-gold)" />
+                    </svg>
                   </div>
                 </div>
               </div>

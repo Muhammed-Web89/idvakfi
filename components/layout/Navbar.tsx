@@ -35,8 +35,8 @@ export default function Navbar() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-            ? 'bg-brand-navy/95 backdrop-blur-md shadow-lg py-3'
-            : 'bg-transparent py-5'
+          ? 'bg-brand-navy/95 backdrop-blur-md shadow-lg py-3'
+          : 'bg-transparent py-5'
           }`}
         dir={isRTL ? 'rtl' : 'ltr'}
       >
@@ -44,13 +44,10 @@ export default function Navbar() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center group">
-              <Image
+              <img
                 src="/logo.png?v=3"
                 alt="Uluslararası İslami Davet Vakfı Logo"
-                width={138}
-                height={40}
                 className="h-10 w-auto object-contain group-hover:opacity-90 transition-opacity duration-300"
-                priority
               />
             </Link>
 
