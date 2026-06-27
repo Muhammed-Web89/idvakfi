@@ -58,7 +58,7 @@ export default function MobileMenu({
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-white/10">
               <img
-                src="/logo.png"
+                src="/logo.png?v=3"
                 alt="Uluslararası İslami Davet Vakfı Logo"
                 className="h-8 w-auto object-contain"
               />

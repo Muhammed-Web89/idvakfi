@@ -45,7 +45,7 @@ export default function Navbar() {
             {/* Logo */}
             <Link href="/" className="flex items-center group">
               <Image
-                src="/logo.png"
+                src="/logo.png?v=3"
                 alt="Uluslararası İslami Davet Vakfı Logo"
                 width={138}
                 height={40}
