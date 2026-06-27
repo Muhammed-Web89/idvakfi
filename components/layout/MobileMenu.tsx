@@ -57,9 +57,11 @@ export default function MobileMenu({
           >
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-white/10">
-              <span className="text-white font-playfair font-bold text-lg">
-                İslami Davet Vakfı
-              </span>
+              <img
+                src="/logo.png"
+                alt="Uluslararası İslami Davet Vakfı Logo"
+                className="h-8 w-auto object-contain"
+              />
               <button
                 onClick={onClose}
                 className="p-2 text-gray-400 hover:text-white transition-colors"

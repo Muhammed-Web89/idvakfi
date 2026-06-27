@@ -23,45 +23,35 @@ export default function Navbar() {
   }, [])
 
   const navLinks = [
-    { label: t('home'),       href: '/' },
-    { label: t('about'),      href: '/hakkimizda' },
+    { label: t('home'), href: '/' },
+    { label: t('about'), href: '/hakkimizda' },
     { label: t('activities'), href: '/faaliyetler' },
-    { label: t('news'),       href: '/gundem' },
-    { label: t('articles'),   href: '/makaleler' },
-    { label: t('scholars'),   href: '/hocalarimiz' },
+    { label: t('news'), href: '/gundem' },
+    { label: t('articles'), href: '/makaleler' },
+    { label: t('scholars'), href: '/hocalarimiz' },
   ]
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
             ? 'bg-brand-navy/95 backdrop-blur-md shadow-lg py-3'
             : 'bg-transparent py-5'
-        }`}
+          }`}
         dir={isRTL ? 'rtl' : 'ltr'}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative w-10 h-10 flex-shrink-0">
-                <div className="w-10 h-10 rounded-full bg-brand-teal flex items-center justify-center group-hover:bg-brand-gold transition-colors duration-300">
-                  <svg viewBox="0 0 40 40" className="w-7 h-7" fill="none">
-                    <path d="M20 4 L34 12 L34 28 L20 36 L6 28 L6 12 Z" stroke="white" strokeWidth="1.5" fill="none"/>
-                    <path d="M20 9 L29 14.5 L29 25.5 L20 31 L11 25.5 L11 14.5 Z" stroke="white" strokeWidth="1" fill="white" fillOpacity="0.15"/>
-                    <circle cx="20" cy="20" r="4" fill="white"/>
-                  </svg>
-                </div>
-              </div>
-              <div className="hidden sm:block">
-                <span className="block text-white font-playfair font-bold text-base leading-tight group-hover:text-brand-gold transition-colors duration-300">
-                  İslami Davet
-                </span>
-                <span className="block text-brand-teal text-xs font-medium tracking-wide">
-                  Vakfı
-                </span>
-              </div>
+            <Link href="/" className="flex items-center group">
+              <Image
+                src="/logo.png"
+                alt="Uluslararası İslami Davet Vakfı Logo"
+                width={138}
+                height={40}
+                className="h-10 w-auto object-contain group-hover:opacity-90 transition-opacity duration-300"
+                priority
+              />
             </Link>
 
             {/* Desktop Nav */}

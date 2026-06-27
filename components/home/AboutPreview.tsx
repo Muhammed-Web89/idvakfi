@@ -49,10 +49,10 @@ export default function AboutPreview() {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-32 h-32 rounded-full bg-brand-navy/90 flex items-center justify-center shadow-2xl">
                     <svg viewBox="0 0 80 80" className="w-20 h-20" fill="none">
-                      <polygon points="40,5 65,20 70,48 55,70 25,70 10,48 15,20" stroke="#0d6e6e" strokeWidth="2" fill="none"/>
-                      <polygon points="40,18 57,28 60,48 50,62 30,62 20,48 23,28" stroke="#c9a84c" strokeWidth="1.5" fill="none"/>
-                      <circle cx="40" cy="40" r="10" stroke="#0d6e6e" strokeWidth="2" fill="rgba(13,110,110,0.2)"/>
-                      <circle cx="40" cy="40" r="4" fill="#c9a84c"/>
+                      <polygon points="40,5 65,20 70,48 55,70 25,70 10,48 15,20" stroke="#0d6e6e" strokeWidth="2" fill="none" />
+                      <polygon points="40,18 57,28 60,48 50,62 30,62 20,48 23,28" stroke="#c9a84c" strokeWidth="1.5" fill="none" />
+                      <circle cx="40" cy="40" r="10" stroke="#0d6e6e" strokeWidth="2" fill="rgba(13,110,110,0.2)" />
+                      <circle cx="40" cy="40" r="4" fill="#c9a84c" />
                     </svg>
                   </div>
                 </div>

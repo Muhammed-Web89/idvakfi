@@ -144,11 +144,11 @@ export default function HeroSection() {
                 {/* Geometric shape */}
                 <div className="absolute inset-8 rounded-full bg-brand-teal/10 border border-brand-teal/20 flex items-center justify-center backdrop-blur-sm">
                   <svg viewBox="0 0 200 200" className="w-3/4 h-3/4 opacity-60" fill="none">
-                    <polygon points="100,10 155,40 180,95 155,150 100,180 45,150 20,95 45,40" stroke="#0d6e6e" strokeWidth="1.5" fill="none"/>
-                    <polygon points="100,35 140,58 158,100 140,142 100,165 60,142 42,100 60,58" stroke="#c9a84c" strokeWidth="1" fill="none"/>
-                    <polygon points="100,65 122,80 130,105 122,130 100,145 78,130 70,105 78,80" stroke="#0d6e6e" strokeWidth="0.8" fill="rgba(13,110,110,0.1)"/>
-                    <circle cx="100" cy="100" r="18" stroke="#c9a84c" strokeWidth="1.5" fill="rgba(201,168,76,0.1)"/>
-                    <circle cx="100" cy="100" r="5" fill="#c9a84c"/>
+                    <polygon points="100,10 155,40 180,95 155,150 100,180 45,150 20,95 45,40" stroke="#0d6e6e" strokeWidth="1.5" fill="none" />
+                    <polygon points="100,35 140,58 158,100 140,142 100,165 60,142 42,100 60,58" stroke="#c9a84c" strokeWidth="1" fill="none" />
+                    <polygon points="100,65 122,80 130,105 122,130 100,145 78,130 70,105 78,80" stroke="#0d6e6e" strokeWidth="0.8" fill="rgba(13,110,110,0.1)" />
+                    <circle cx="100" cy="100" r="18" stroke="#c9a84c" strokeWidth="1.5" fill="rgba(201,168,76,0.1)" />
+                    <circle cx="100" cy="100" r="5" fill="#c9a84c" />
                   </svg>
                 </div>
               </div>
