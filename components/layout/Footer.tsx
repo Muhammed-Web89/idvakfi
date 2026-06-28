@@ -58,7 +58,7 @@ export default function Footer() {
               <img
                 src="/logo.png?v=3"
                 alt="Uluslararası İslami Davet Vakfı Logo"
-                className="h-14 w-auto object-contain"
+                className="w-[255px] h-auto object-contain"
               />
             </div>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">{t('shortDesc')}</p>
