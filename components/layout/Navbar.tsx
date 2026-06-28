@@ -47,7 +47,7 @@ export default function Navbar() {
               <img
                 src="/logo.png?v=3"
                 alt="Uluslararası İslami Davet Vakfı Logo"
-                className="h-10 w-auto object-contain group-hover:opacity-90 transition-opacity duration-300"
+                className="h-12 w-auto object-contain group-hover:opacity-90 transition-opacity duration-300"
               />
             </Link>
 
