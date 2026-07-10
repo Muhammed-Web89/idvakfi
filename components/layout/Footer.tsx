@@ -20,10 +20,9 @@ function InstagramIcon() {
 }
 
 const SOCIALS = [
-  { Icon: FacebookIcon, href: 'https://facebook.com/idvakfi', label: 'Facebook' },
-  { Icon: XIcon, href: 'https://twitter.com/idvakfi', label: 'X (Twitter)' },
-  { Icon: YoutubeIcon, href: 'https://youtube.com/@idvakfi', label: 'YouTube' },
-  { Icon: InstagramIcon, href: 'https://instagram.com/idvakfi', label: 'Instagram' },
+  { Icon: XIcon, href: 'https://x.com/islamidavetvkf', label: 'X (Twitter)' },
+  { Icon: YoutubeIcon, href: 'https://youtube.com/@İslamiDavetVakfı', label: 'YouTube' },
+  { Icon: InstagramIcon, href: 'https://instagram.com/islamidavetvakfi', label: 'Instagram' },
 ]
 
 export default function Footer() {

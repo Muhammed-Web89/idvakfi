@@ -12,15 +12,15 @@ export default function StatsSection() {
   const isRTL = locale === 'ar'
 
   const stats = [
-    { value: 15, suffix: '+', label: t('years'),        desc: 'Yıldır Hizmet' },
-    { value: 120, suffix: '+', label: t('projects'),    desc: 'Başarıyla Tamamlandı' },
-    { value: 5000, suffix: '+', label: t('members'),    desc: 'Dünya Genelinde' },
-    { value: 50, suffix: '+',  label: t('publications'), desc: 'Kitap & Dergi' },
+    { value: 11, suffix: ' ' + t('thousand') + '+', label: t('koreaTitle'), subtitle: t('koreaSubtitle'), desc: t('koreaDesc') },
+    { value: 100, suffix: ' ' + t('thousand') + '+', label: t('japanHidayetTitle'), subtitle: t('japanHidayetSubtitle'), desc: t('japanHidayetDesc') },
+    { value: 401, suffix: '', label: t('japanCamiTitle'), subtitle: t('japanCamiSubtitle'), desc: t('japanCamiDesc') },
+    { value: 1740, suffix: '+', label: t('teskilatTitle'), subtitle: t('teskilatSubtitle'), desc: t('teskilatDesc') },
   ]
 
   return (
     <section
-      className="relative py-20 bg-brand-navyMid overflow-hidden"
+      className="relative py-24 bg-brand-navyMid overflow-hidden"
       aria-label="İstatistikler"
       dir={isRTL ? 'rtl' : 'ltr'}
     >
@@ -36,21 +36,22 @@ export default function StatsSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
         >
           {stats.map((stat, i) => (
             <motion.div
               key={i}
               variants={itemVariants}
-              className={`text-center ${
+              className={`text-center flex flex-col items-center px-2 py-4 ${
                 i < stats.length - 1 ? 'lg:border-r lg:border-white/10' : ''
               }`}
             >
-              <div className="font-playfair font-bold text-4xl sm:text-5xl text-brand-gold mb-2">
+              <div className="font-playfair font-bold text-4xl sm:text-5xl text-brand-gold mb-3">
                 <AnimatedCounter target={stat.value} suffix={stat.suffix} duration={2200} />
               </div>
               <div className="text-white font-semibold text-base mb-1">{stat.label}</div>
-              <div className="text-gray-400 text-sm">{stat.desc}</div>
+              <div className="text-brand-gold/80 font-medium text-xs mb-3 italic">{stat.subtitle}</div>
+              <div className="text-gray-400 text-xs leading-relaxed text-center max-w-[260px]">{stat.desc}</div>
             </motion.div>
           ))}
         </motion.div>

@@ -40,7 +40,7 @@ const ACTIVITIES = [
     icon: Heart,
     titleKey: 'social' as const,
     descKey: 'socialDesc' as const,
-    image: 'https://images.unsplash.com/photo-1593113630400-ea4288922559?w=400&q=80',
+    image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&q=80',
     large: false,
   },
   {

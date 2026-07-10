@@ -45,9 +45,9 @@ export default function HeroSection() {
   const isRTL = locale === 'ar'
 
   const stats = [
-    { value: 15, suffix: '+', label: ts('years') },
-    { value: 120, suffix: '+', label: ts('projects') },
-    { value: 5000, suffix: '+', label: ts('members') },
+    { value: 75, suffix: '', label: ts('founders') },
+    { value: 15, suffix: '', label: ts('languages') },
+    { value: 15, suffix: '+', label: ts('partners') },
   ]
 
   return (

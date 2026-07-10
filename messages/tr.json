@@ -4,9 +4,12 @@
     "about": "Hakkımızda",
     "activities": "Faaliyetler",
     "news": "Gündem",
-    "articles": "Makaleler",
+    "articles": "Yayınlar",
     "scholars": "Hocalarımız",
-    "contact": "İletişim"
+    "contact": "İletişim",
+    "corporate": "Kurumsal",
+    "organization": "Organizasyon",
+    "membership": "Üyelik"
   },
   "hero": {
     "badge": "İslam'ı Anlatmak, İnsanlığa Hizmet Etmek",
@@ -18,10 +21,19 @@
     "scrollDown": "Aşağı Kaydır"
   },
   "stats": {
-    "years": "Yıllık Deneyim",
-    "projects": "Tamamlanan Proje",
-    "members": "Aktif Üye",
-    "publications": "Yayın"
+    "koreaTitle": "Tarihi Kore Daveti",
+    "koreaSubtitle": "Gönüllü İhtida ve Kardeşlik",
+    "koreaDesc": "1952 Kore Savaşı sırasında Türk tugayındaki askerlerimizin samimi ahlakı ve tebliğ çalışmalarıyla İslamiyet'i seçen Korelilerin sayısı. Asya vizyonumuzun köklü geçmişini temsil eder.",
+    "japanHidayetTitle": "Uzak Doğu Hidayet Dalgası",
+    "japanHidayetSubtitle": "İslam'la Şereflenen Japonlar",
+    "japanHidayetDesc": "2000–2020 yılları arasında yürütülen kesintisiz tebliğ ve davet faaliyetleri sonucunda hidayete kavuşarak Müslüman olan Japon kardeşlerimizin sayısı.",
+    "japanCamiTitle": "Gönül Köprüleri",
+    "japanCamiSubtitle": "Japonya Cami ve Mescitleri",
+    "japanCamiDesc": "Yürütülen yoğun davet çalışmaları ve kurumsal destekler neticesinde Japonya genelinde ibadete ve tebliğ faaliyetlerine açılan faal cami sayısı.",
+    "teskilatTitle": "Birleşik Teşkilat Gücü",
+    "teskilatSubtitle": "Protokollü Aktif Sivil Üyeler",
+    "teskilatDesc": "Vakfımızın ortak hizmet protokolü imzaladığı Başakşehir, Beykoz, Pendik, Ümraniye, Kağıthane ve Sultanbeyli gibi bölgelerdeki 14 kurucu sivil toplum kuruluşu ve platformun toplam aktif üye gücü.",
+    "thousand": "Bin"
   },
   "about": {
     "tag": "Hakkımızda",
@@ -65,9 +77,9 @@
     "quickLinks": "Hızlı Linkler",
     "contact": "İletişim",
     "latestPosts": "Son Yazılar",
-    "address": "Fatih, İstanbul, Türkiye",
+    "address": "HESKOOP San. Sit. M-7 Blok No:111 Başakşehir / İstanbul, Türkiye",
     "phone": "+90 212 000 00 00",
-    "email": "info@idvakfi.org",
+    "email": "islamidavetvakfi@gmail.com",
     "copyright": "© 2024 İslami Davet Vakfı. Tüm hakları saklıdır.",
     "privacy": "Gizlilik Politikası",
     "shortDesc": "Hakikat yolunda ilim, irşat ve davet faaliyetleriyle insanlığa hizmet eden sivil toplum kuruluşu."

@@ -60,6 +60,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       lang={locale}
       dir={isRTL ? 'rtl' : 'ltr'}
       className={`${playfair.variable} ${inter.variable} ${notoNaskhArabic.variable}`}
+      data-scroll-behavior="smooth"
     >
       <body className={`font-inter bg-brand-cream antialiased ${isRTL ? 'font-arabic' : ''}`}>
         <NextIntlClientProvider messages={messages}>

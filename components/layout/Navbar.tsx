@@ -24,10 +24,12 @@ export default function Navbar() {
 
   const navLinks = [
     { label: t('home'), href: '/' },
+    { label: t('corporate'), href: '/kurumsal' },
     { label: t('about'), href: '/hakkimizda' },
-    { label: t('activities'), href: '/faaliyetler' },
-    { label: t('news'), href: '/gundem' },
+    { label: t('organization'), href: '/organizasyon' },
+    { label: t('membership'), href: '/uyelik' },
     { label: t('articles'), href: '/makaleler' },
+    { label: t('activities'), href: '/faaliyetler' },
     { label: t('scholars'), href: '/hocalarimiz' },
   ]
 
