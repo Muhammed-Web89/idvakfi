@@ -26,25 +26,33 @@ export default function SectionTitle({
   return (
     <div className={`${alignClass} ${className}`}>
       {tag && (
-        <span className="inline-block text-xs font-semibold tracking-widest uppercase text-brand-gold mb-3 border border-brand-gold/30 px-3 py-1 rounded-full">
+        <span
+          className={`inline-block font-inter text-[12px] font-semibold tracking-[0.1em] uppercase mb-3 px-3 py-1 rounded ${
+            dark
+              ? 'text-white/60 bg-white/10'
+              : 'text-[#2D6A6A] bg-[rgba(27,77,77,0.08)]'
+          }`}
+        >
           {tag}
         </span>
       )}
       <h2
-        className={`font-playfair font-bold text-3xl md:text-4xl lg:text-5xl leading-tight mb-4 ${
-          dark ? 'text-white' : 'text-brand-navy'
+        className={`font-amiri font-bold text-[32px] md:text-[38px] lg:text-[42px] leading-tight mb-4 ${
+          dark ? 'text-white' : 'text-[#1A1A1A]'
         }`}
       >
         {title}{' '}
         {highlight && (
-          <span className="text-brand-gold">{highlight}</span>
+          <span className={dark ? 'text-[#3D8B8B]' : 'text-[#1B4D4D]'}>
+            {highlight}
+          </span>
         )}
       </h2>
       {subtitle && (
         <p
-          className={`text-base md:text-lg max-w-2xl leading-relaxed ${
+          className={`font-inter text-[16px] md:text-[17px] max-w-2xl leading-relaxed ${
             align === 'center' ? 'mx-auto' : ''
-          } ${dark ? 'text-gray-300' : 'text-gray-600'}`}
+          } ${dark ? 'text-white/70' : 'text-[#5C5C5C]'}`}
         >
           {subtitle}
         </p>

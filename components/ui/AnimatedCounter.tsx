@@ -7,6 +7,7 @@ interface AnimatedCounterProps {
   target: number
   suffix?: string
   duration?: number
+  formatThousands?: boolean
   className?: string
 }
 
@@ -18,7 +19,8 @@ const toArabicDigits = (val: number | string): string => {
 export default function AnimatedCounter({
   target,
   suffix = '',
-  duration = 2000,
+  duration = 2500,
+  formatThousands = false,
   className = '',
 }: AnimatedCounterProps) {
   const [count, setCount] = useState(0)
@@ -36,7 +38,7 @@ export default function AnimatedCounter({
           hasAnimated.current = true
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.2 }
     )
     if (ref.current) observer.observe(ref.current)
     return () => observer.disconnect()
@@ -59,7 +61,11 @@ export default function AnimatedCounter({
     requestAnimationFrame(animate)
   }, [isVisible, target, duration])
 
-  const displayCount = isAR ? toArabicDigits(count) : count
+  const formattedValue = formatThousands
+    ? count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+    : count.toString()
+
+  const displayCount = isAR ? toArabicDigits(formattedValue) : formattedValue
   const displaySuffix = isAR ? toArabicDigits(suffix) : suffix
 
   return (

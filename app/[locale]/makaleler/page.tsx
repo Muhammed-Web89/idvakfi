@@ -4,10 +4,9 @@ import { use, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useLocale } from 'next-intl'
 import { Link } from '@/i18n/routing'
-import { Calendar, User, Clock, ArrowRight } from 'lucide-react'
+import { Calendar, Clock, ArrowRight } from 'lucide-react'
 import { staticArticles } from '@/lib/staticData'
 import IslamicPattern from '@/components/ui/IslamicPattern'
-import SectionTitle from '@/components/ui/SectionTitle'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -21,8 +20,10 @@ export default function ArticlesPage({ params }: Props) {
 
   const categories = [
     { id: 'all', label: locale === 'ar' ? 'الكل' : 'Tümü' },
-    { id: 'Stratejik Raporlar', label: locale === 'ar' ? 'تقارير استراتيجية' : 'Stratejik Raporlar' },
-    { id: 'İstişare Kararları', label: locale === 'ar' ? 'قرارات استشارية' : 'İstişare Kararları' }
+    { id: 'KELAM', label: 'Kelam' },
+    { id: 'TEFSİR', label: 'Tefsir' },
+    { id: 'DAVET', label: 'Davet' },
+    { id: 'İstişare Toplantısı', label: 'İstişare Raporları' },
   ]
 
   const filteredArticles = staticArticles.filter(
@@ -30,22 +31,21 @@ export default function ArticlesPage({ params }: Props) {
   )
 
   return (
-    <div className="bg-brand-cream min-h-screen pb-20" dir={isRTL ? 'rtl' : 'ltr'}>
+    <div className="bg-[#F7F5F0] min-h-screen pb-20" dir={isRTL ? 'rtl' : 'ltr'}>
       {/* Page Hero */}
-      <section className="relative bg-brand-navy py-24 text-white overflow-hidden">
+      <section className="relative bg-[#0F2E2E] py-24 text-white overflow-hidden">
         <IslamicPattern opacity={0.05} color="white" size={100} />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-brand-dark/50" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8">
-          <span className="text-brand-gold font-semibold uppercase tracking-widest text-sm block mb-3">
-            {locale === 'ar' ? 'البحوث والتقارير والدراسات' : 'Fikri Birikim ve Saha Araştırmaları'}
+          <span className="font-inter text-[12px] font-semibold text-[#3D8B8B] uppercase tracking-[0.1em] block mb-3">
+            {locale === 'ar' ? 'البحوث والتقارير والدراسات' : 'Fikri Birikim ve Akademik Külliyat'}
           </span>
-          <h1 className="font-playfair font-bold text-4xl sm:text-5xl md:text-6xl text-white mb-6">
-            {locale === 'ar' ? 'المنشورات والتقارير' : 'Yayınlar ve Raporlar'}
+          <h1 className="font-amiri font-bold text-4xl sm:text-5xl md:text-6xl text-white mb-6">
+            {locale === 'ar' ? 'المنشورات والمقالات' : 'Yayınlar ve Makaleler'}
           </h1>
-          <p className="text-gray-300 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed">
+          <p className="font-inter text-white/80 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed">
             {locale === 'ar'
               ? 'تقارير تقييمية ودراسات ميدانية وتحليلات استشارية شاملة لواقع ومستقبل الدعوة والعمل الإسلامي.'
-              : 'Vakfımızın gerçekleştirdiği istişare toplantıları, saha araştırmaları ve stratejik gelecek planlamalarının resmi rapor ve analizleri.'}
+              : 'Vakfımızın akademisyen, düşünür ve yazar üyelerinin kaleme aldığı ilmi makaleler ve stratejik istişare raporları.'}
           </p>
         </div>
       </section>
@@ -57,10 +57,10 @@ export default function ArticlesPage({ params }: Props) {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-all duration-300 ${
+              className={`px-5 py-2 rounded-[6px] font-inter text-xs font-semibold transition-all duration-200 ${
                 activeCategory === cat.id
-                  ? 'bg-brand-teal text-white shadow-lg'
-                  : 'bg-white text-gray-600 hover:text-brand-teal border border-brand-teal/5'
+                  ? 'bg-[#1B4D4D] text-white shadow-sm'
+                  : 'bg-white text-[#5C5C5C] hover:text-[#1B4D4D] border border-[#E5E2DA]'
               }`}
             >
               {cat.label}
@@ -75,50 +75,52 @@ export default function ArticlesPage({ params }: Props) {
               key={art.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="bg-white rounded-3xl overflow-hidden border border-brand-teal/5 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
+              transition={{ duration: 0.5, delay: idx * 0.08 }}
+              className="bg-white rounded-xl overflow-hidden border border-[#E5E2DA] shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between group"
             >
               <div>
-                {/* Visual placeholder with Islamic pattern */}
-                <div className="h-48 bg-brand-navyMid relative flex items-center justify-center overflow-hidden">
-                  <IslamicPattern opacity={0.08} color="white" size={60} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <span className="absolute bottom-4 left-4 bg-brand-gold text-brand-navy font-semibold text-[10px] uppercase px-3 py-1 rounded-full">
+                {/* Visual placeholder */}
+                <div className="h-48 bg-gradient-to-br from-[#0F2E2E] to-[#1B4D4D] relative flex items-center justify-center overflow-hidden">
+                  <IslamicPattern opacity={0.1} color="white" size={60} />
+                  <span className="absolute bottom-4 left-4 bg-[rgba(27,77,77,0.8)] backdrop-blur-sm text-white font-inter font-semibold text-[11px] uppercase tracking-wider px-3 py-1 rounded">
                     {art.category}
                   </span>
                 </div>
 
                 {/* Content info */}
                 <div className="p-6">
-                  <div className="flex items-center gap-4 text-[10px] text-gray-400 mb-3">
+                  <div className="flex items-center gap-4 text-[12px] text-[#8A8A8A] mb-3">
                     <span className="flex items-center gap-1">
-                      <Calendar className="w-3 h-3 text-brand-teal" />
+                      <Calendar className="w-3.5 h-3.5 text-[#2D6A6A]" />
                       {art.date}
                     </span>
                     <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3 text-brand-teal" />
-                      {art.readTime}
+                      <Clock className="w-3.5 h-3.5 text-[#2D6A6A]" />
+                      {art.readTime} okuma
                     </span>
                   </div>
 
-                  <h3 className="font-playfair font-bold text-lg text-brand-navy mb-3 line-clamp-2 group-hover:text-brand-teal transition-colors">
-                    {art.title}
-                  </h3>
+                  <Link href={`/makaleler/${art.slug}`}>
+                    <h3 className="font-amiri font-bold text-xl text-[#1A1A1A] group-hover:text-[#1B4D4D] transition-colors leading-snug mb-3 line-clamp-2">
+                      {art.title}
+                    </h3>
+                  </Link>
 
-                  <p className="text-gray-500 text-xs leading-relaxed line-clamp-3">
+                  <p className="font-inter text-[#5C5C5C] text-sm leading-relaxed line-clamp-3 mb-4">
                     {art.excerpt}
                   </p>
                 </div>
               </div>
 
-              {/* Read button */}
-              <div className="p-6 pt-0">
+              {/* Bottom footer */}
+              <div className="p-6 pt-0 flex items-center justify-between border-t border-[#E5E2DA] mt-2 pt-4">
+                <span className="font-inter text-xs text-[#5C5C5C] font-medium">{art.author}</span>
                 <Link
                   href={`/makaleler/${art.slug}`}
-                  className="w-full flex items-center justify-between text-brand-teal font-semibold text-xs border-t border-gray-50 pt-4 group-hover:text-brand-tealDark transition-colors"
+                  className="font-inter text-xs font-semibold text-[#1B4D4D] group-hover:text-[#2D6A6A] flex items-center gap-1"
                 >
-                  <span>{locale === 'ar' ? 'اقرأ التقرير كاملاً' : 'Raporu Oku'}</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <span>Oku</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-[#1B4D4D] group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </motion.div>

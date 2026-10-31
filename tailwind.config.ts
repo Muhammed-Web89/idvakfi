@@ -9,62 +9,41 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        'primary-green': '#1B4D4D',
+        'primary-green-light': '#2D6A6A',
+        'primary-green-dark': '#0F2E2E',
+        'primary-green-muted': '#3D8B8B',
+        'bg-cream': '#F7F5F0',
+        'bg-white': '#FFFFFF',
+        'bg-dark-section': '#1B4D4D',
+        'text-primary': '#1A1A1A',
+        'text-secondary': '#5C5C5C',
+        'text-muted': '#8A8A8A',
+        'border-light': '#E5E2DA',
+        'border-green': '#2D6A6A',
+        // Semantic aliases
         brand: {
-          teal: '#0d6e6e',
-          tealDark: '#085050',
-          tealLight: '#e8f5f5',
-          navy: '#0a1628',
-          navyMid: '#0f2240',
-          emerald: '#1a4a3a',
-          gold: '#c9a84c',
-          goldLight: '#f0e0a0',
-          goldDark: '#a07830',
-          cream: '#faf8f3',
-          white: '#ffffff',
-          dark: '#0a0e1a',
+          green: '#1B4D4D',
+          greenLight: '#2D6A6A',
+          greenDark: '#0F2E2E',
+          greenMuted: '#3D8B8B',
+          cream: '#F7F5F0',
         }
       },
       fontFamily: {
-        playfair: ['Playfair Display', 'serif'],
-        inter: ['Inter', 'sans-serif'],
-        arabic: ['Noto Naskh Arabic', 'serif'],
+        amiri: ['var(--font-amiri)', 'Amiri', 'serif'],
+        inter: ['var(--font-inter)', 'Inter', 'sans-serif'],
+        sans: ['var(--font-inter)', 'Inter', 'sans-serif'],
+        serif: ['var(--font-amiri)', 'Amiri', 'serif'],
+        arabic: ['var(--font-arabic)', 'Noto Naskh Arabic', 'serif'],
       },
       animation: {
         'bounce-slow': 'bounce 2s infinite',
-        'float': 'float 6s ease-in-out infinite',
-        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'particle': 'particle 20s linear infinite',
-      },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
-        },
-        particle: {
-          '0%': { transform: 'translateY(100vh) translateX(0)' },
-          '100%': { transform: 'translateY(-100px) translateX(50px)' },
-        }
+        'spin-slow': 'spin 60s linear infinite',
       },
       backgroundImage: {
-        'gradient-navy': 'linear-gradient(135deg, #0a1628 0%, #1a4a3a 100%)',
-        'gradient-hero': 'linear-gradient(135deg, #0a1628 0%, #0f2240 50%, #1a4a3a 100%)',
-        'gradient-teal': 'linear-gradient(135deg, #0d6e6e 0%, #0a1628 100%)',
-        'gradient-gold': 'linear-gradient(135deg, #c9a84c 0%, #a07830 100%)',
-      },
-      typography: {
-        DEFAULT: {
-          css: {
-            color: '#0a1628',
-            'h1, h2, h3, h4': {
-              fontFamily: 'Playfair Display, serif',
-              color: '#0a1628',
-            },
-            a: {
-              color: '#0d6e6e',
-              '&:hover': { color: '#085050' },
-            },
-          },
-        },
+        'hero-gradient': 'linear-gradient(135deg, #0F2E2E 0%, #1B4D4D 50%, #2D6A6A 100%)',
+        'cta-gradient': 'linear-gradient(135deg, #1B4D4D 0%, #0F2E2E 100%)',
       },
     },
   },
@@ -74,3 +53,4 @@ const config: Config = {
 }
 
 export default config
+

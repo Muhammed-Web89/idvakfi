@@ -2,40 +2,20 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider, hasLocale } from 'next-intl'
 import { getMessages } from 'next-intl/server'
-import { Playfair_Display, Inter, Noto_Naskh_Arabic } from 'next/font/google'
 import { routing } from '@/i18n/routing'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import '@/app/globals.css'
 
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  variable: '--font-playfair',
-  display: 'swap',
-})
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-})
-
-const notoNaskhArabic = Noto_Naskh_Arabic({
-  subsets: ['arabic'],
-  variable: '--font-arabic',
-  display: 'swap',
-  weight: ['400', '500', '600', '700'],
-})
-
 export const metadata: Metadata = {
   title: {
-    default: 'İslami Davet Vakfı',
-    template: '%s | İslami Davet Vakfı',
+    default: 'Uluslararası İslami Davet Vakfı',
+    template: '%s | Uluslararası İslami Davet Vakfı',
   },
   description: 'Hakikat yolunda ilim, irşat ve davet faaliyetleriyle insanlığa rehberlik eden köklü bir sivil toplum kuruluşu.',
-  keywords: ['İslami Davet Vakfı', 'vakıf', 'İslam', 'davet', 'irşat', 'ilim'],
+  keywords: ['İslami Davet Vakfı', 'vakıf', 'İslam', 'davet', 'irşat', 'ilim', 'Kore daveti', 'Japonya camileri'],
   openGraph: {
-    siteName: 'İslami Davet Vakfı',
+    siteName: 'Uluslararası İslami Davet Vakfı',
     type: 'website',
   },
 }
@@ -45,7 +25,7 @@ type Props = {
   params: Promise<{ locale: string }>
 }
 
-export default async function LocaleLayout({ children, params }: Props) {
+export default async function RootLayout({ children, params }: Props) {
   const { locale } = await params
 
   if (!hasLocale(routing.locales, locale)) {
@@ -56,16 +36,11 @@ export default async function LocaleLayout({ children, params }: Props) {
   const isRTL = locale === 'ar'
 
   return (
-    <html
-      lang={locale}
-      dir={isRTL ? 'rtl' : 'ltr'}
-      className={`${playfair.variable} ${inter.variable} ${notoNaskhArabic.variable}`}
-      data-scroll-behavior="smooth"
-    >
-      <body className={`font-inter bg-brand-cream antialiased ${isRTL ? 'font-arabic' : ''}`}>
-        <NextIntlClientProvider messages={messages}>
+    <html lang={locale} dir={isRTL ? 'rtl' : 'ltr'} className="scroll-smooth">
+      <body className="min-h-screen flex flex-col bg-[#F7F5F0] text-[#1A1A1A] font-inter antialiased">
+        <NextIntlClientProvider locale={locale} messages={messages}>
           <Navbar />
-          <main>{children}</main>
+          <main className="flex-1">{children}</main>
           <Footer />
         </NextIntlClientProvider>
       </body>

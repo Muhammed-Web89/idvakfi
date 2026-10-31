@@ -3,9 +3,8 @@
 import { use, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useLocale } from 'next-intl'
-import { Users, ShieldCheck, UserCheck, Star, Award, Phone, MapPin, Search } from 'lucide-react'
+import { Users, ShieldCheck, Star, Award, Phone } from 'lucide-react'
 import IslamicPattern from '@/components/ui/IslamicPattern'
-import SectionTitle from '@/components/ui/SectionTitle'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -73,10 +72,10 @@ export default function OrganizationPage({ params }: Props) {
       { name: 'Metin Aşar', role: 'Stratejik Siyasi Danışman (Cumhurbaşkanı Danışmanı & İş Adamı)', phone: '0532 467 68 55' }
     ],
     council: [
-      { name: 'Prof. Orhan Çeker', role: 'Akademik Üye (İslam Hukuku)', phone: '0555 393 87 82' },
-      { name: 'Prof. Saim Ayaz', role: 'Akademik Üye', phone: '0532 387 57 01' },
+      { name: 'Prof. Dr. Orhan Çeker', role: 'Akademik Üye (İslam Hukuku)', phone: '0555 393 87 82' },
+      { name: 'Prof. Dr. Saim Ayaz', role: 'Akademik Üye', phone: '0532 387 57 01' },
       { name: 'Prof. Dr. Musa Kazım', role: 'Akademik Üye', phone: '0532 168 47 41' },
-      { name: 'Doç. Abdulkadir Turan', role: 'Akademik Üye (Araştırmacı Yazar)', phone: '0505 663 45 30' },
+      { name: 'Doç. Dr. Abdulkadir Turan', role: 'Akademik Üye (Araştırmacı Yazar)', phone: '0505 663 45 30' },
       { name: 'Ahmet Bulut', role: 'Medya & Tebliğ Üyesi (Namaz Platformu Başkanı)', phone: '0505 610 50 44' },
       { name: 'Rüstem Altınbaş', role: 'İletişim & Danışma Üyesi', phone: '0532 321 21 49' },
       { name: 'Yaşar Yıldırım', role: 'Üye', phone: '' },
@@ -102,16 +101,14 @@ export default function OrganizationPage({ params }: Props) {
   }
 
   const founders = [
-    // Academia
     { name: 'Prof. Bilal Kemikli', category: 'academia', desc: 'Yüksek İstişare & Akademisyen', phone: '0535 399 51 44' },
     { name: 'Prof. Musa Kazım', category: 'academia', desc: 'Akademisyen', phone: '0532 168 47 41' },
-    { name: 'Prof. Orhan Çeker', category: 'academia', desc: 'Akademisyen (İslam Hukuku)', phone: '0555 393 87 82' },
-    { name: 'Prof. Saim Ayaz', category: 'academia', desc: 'Akademisyen', phone: '0532 387 57 01' },
-    { name: 'Doç. Abdulkadir Turan', category: 'academia', desc: 'Akademisyen / Yazar', phone: '0505 663 45 30' },
+    { name: 'Prof. Dr. Orhan Çeker', category: 'academia', desc: 'Akademisyen (İslam Hukuku)', phone: '0555 393 87 82' },
+    { name: 'Prof. Dr. Saim Ayaz', category: 'academia', desc: 'Akademisyen', phone: '0532 387 57 01' },
+    { name: 'Doç. Dr. Abdulkadir Turan', category: 'academia', desc: 'Akademisyen / Yazar', phone: '0505 663 45 30' },
     { name: 'Doç. Süleyman Akdemir', category: 'academia', desc: 'Akademisyen / Hukukçu', phone: '0532 272 32 55' },
     { name: 'Adnan Vatansever', category: 'academia', desc: 'Eğitimci', phone: '0543 445 27 84' },
     { name: 'Cemil Arslan', category: 'academia', desc: 'Öğretmen', phone: '0505 649 79 02' },
-    // Business & Tech
     { name: 'Hamit Ulçay', category: 'business', desc: 'Doktor & İş Adamı', phone: '0552 455 33 87' },
     { name: 'Mükremin Karaağaç', category: 'business', desc: 'Emekli Mühendis', phone: '0532 240 26 26' },
     { name: 'M. Emin Başpehlivan', category: 'business', desc: 'Yayıncı (Bahar Yayınları)', phone: '0532 261 14 45' },
@@ -119,22 +116,15 @@ export default function OrganizationPage({ params }: Props) {
     { name: 'İbrahim Güneş', category: 'business', desc: 'Mimar', phone: '0532 466 49 14' },
     { name: 'Ramazan Boztepe', category: 'business', desc: 'Tekniker', phone: '0531 438 18 87' },
     { name: 'Faruk Demirci', category: 'business', desc: 'Teknisyen', phone: '0532 718 33 54' },
-    { name: 'Cemalettin Karademir', category: 'business', desc: 'İş Adamı / Serbest Girişimci', phone: '' },
-    // Law & Bureaucracy
     { name: 'Ali Yüksel', category: 'law', desc: 'Milletvekili / Siyasetçi', phone: '0532 638 23 88' },
     { name: 'Erol Kıraç', category: 'law', desc: 'Avukat / Dost Kalkınma Derneği Bşk.', phone: '0532 521 15 46' },
     { name: 'İhsan Bermekoğlu', category: 'law', desc: 'Avukat / Hukuk Başmüşaviri', phone: '0544 303 19 04' },
     { name: 'Seyfettin Gültekin', category: 'law', desc: 'Üst Bürokrat (Üsküdar Belediyesi Temsilcisi)', phone: '0530 039 47 47' },
     { name: 'Suat Gün', category: 'law', desc: 'Emekli Asker / Uluslararası Kudüs Derneği Bşk.', phone: '0543 391 03 56' },
-    // Culture & Sport
     { name: 'Serkan Yılmaz', category: 'culture', desc: 'Dünya Şampiyonu Sporcu', phone: '0532 342 53 19' },
     { name: 'İsmail Yeşilbağ', category: 'culture', desc: 'Tiyatro Sanatçısı', phone: '0532 256 11 69' },
-    // Others
     { name: 'Yusuf Enginar', category: 'other', desc: 'Veteriner Hekim', phone: '0532 257 41 13' },
-    { name: 'Muhammed Şirin Yerdelen', category: 'other', desc: 'Medrese Hocası / Din Görevlisi', phone: '0533 543 54 34' },
-    { name: 'Yakup Yusuf Uygur', category: 'other', desc: 'Din Görevlisi', phone: '' },
-    { name: 'Adem Gürbüz', category: 'other', desc: 'Serbest', phone: '' },
-    { name: 'Mustafa Malcıoğlu', category: 'other', desc: 'Serbest', phone: '' }
+    { name: 'Muhammed Şirin Yerdelen', category: 'other', desc: 'Medrese Hocası / Din Görevlisi', phone: '0533 543 54 34' }
   ]
 
   const filteredFounders = founders.filter(
@@ -149,19 +139,18 @@ export default function OrganizationPage({ params }: Props) {
   ]
 
   return (
-    <div className="bg-brand-cream min-h-screen pb-24" dir={isRTL ? 'rtl' : 'ltr'}>
+    <div className="bg-[#F7F5F0] min-h-screen pb-24" dir={isRTL ? 'rtl' : 'ltr'}>
       {/* Page Hero */}
-      <section className="relative bg-brand-navy py-24 text-white overflow-hidden">
-        <IslamicPattern opacity={0.05} color="white" size={100} />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-brand-dark/50" />
+      <section className="relative bg-[#0F2E2E] py-24 text-white overflow-hidden">
+        <IslamicPattern opacity={0.04} color="white" size={100} />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8">
-          <span className="text-brand-gold font-semibold uppercase tracking-widest text-sm block mb-3">
+          <span className="font-inter text-[#3D8B8B] font-semibold uppercase tracking-widest text-xs block mb-3">
             {locale === 'ar' ? 'الهيكل التنظيمي والقيادة' : 'Vakıf Teşkilat Şeması ve Liderlik'}
           </span>
-          <h1 className="font-playfair font-bold text-4xl sm:text-5xl md:text-6xl text-white mb-6">
+          <h1 className="font-amiri font-bold text-4xl sm:text-5xl md:text-6xl text-white mb-6">
             {locale === 'ar' ? 'الهيكل التنظيمي' : 'Organizasyon'}
           </h1>
-          <p className="text-gray-300 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed">
+          <p className="font-inter text-white/80 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed">
             {locale === 'ar'
               ? 'مجموعة من خيرة الكفاءات الأكاديمية والعملية والإرشادية تعمل بتكامل لتحقيق وحدة الأمة ونهضتها.'
               : 'Akademik bilgi üretimi, idari disiplin, toplumsal rehberlik ve kamusal nüfuz alanlarını bir arada barındıran bütünleşik teşkilat şemamız.'}
@@ -171,7 +160,7 @@ export default function OrganizationPage({ params }: Props) {
 
       {/* Tabs Navigator */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
-        <div className="flex flex-wrap justify-center gap-2 border-b border-brand-teal/10 pb-4">
+        <div className="flex flex-wrap justify-center gap-2 border-b border-[#E5E2DA] pb-4">
           {tabs.map((tab) => {
             const Icon = tab.icon
             const active = activeTab === tab.id
@@ -179,10 +168,10 @@ export default function OrganizationPage({ params }: Props) {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center gap-2 px-5 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
+                className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-inter text-sm font-semibold transition-all ${
                   active
-                    ? 'bg-brand-teal text-white shadow-lg shadow-brand-teal/20 scale-105'
-                    : 'text-gray-600 hover:text-brand-teal hover:bg-brand-tealLight bg-white border border-brand-teal/5'
+                    ? 'bg-[#1B4D4D] text-white shadow-sm'
+                    : 'text-[#5C5C5C] hover:text-[#1B4D4D] bg-white border border-[#E5E2DA]'
                 }`}
               >
                 <Icon className="w-4 h-4" />
@@ -203,31 +192,26 @@ export default function OrganizationPage({ params }: Props) {
             className="space-y-8"
           >
             <div className="text-center max-w-2xl mx-auto mb-10">
-              <h2 className="font-playfair font-bold text-2xl sm:text-3xl text-brand-navy">
+              <h2 className="font-amiri font-bold text-2xl sm:text-3xl text-[#1A1A1A]">
                 {locale === 'ar' ? 'مجلس الإدارة التنفيذي' : 'Yönetim Kurulu ve İdari Liderlik'}
               </h2>
-              <p className="text-gray-500 text-sm mt-2">
-                {locale === 'ar'
-                  ? 'الهيئة التنفيذية العليا المسؤولة عن تنسيق أنشطة الدعوة والتعليم والمالية بتخصص ومسؤولية.'
-                  : 'Vakfın en üst düzey icra organı olan Yönetim Kurulu, ekonomi, eğitim, finans ve aile gibi kritik sosyal katmanlarda derinlemesine bir uzmanlaşma sergilemektedir.'}
-              </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {boardMembers.map((member, idx) => (
                 <div
                   key={idx}
-                  className="bg-white/80 border border-brand-teal/10 rounded-2xl p-6 shadow-sm hover:shadow-md hover:bg-white transition-all duration-300 flex flex-col justify-between"
+                  className="bg-white border border-[#E5E2DA] rounded-xl p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
                 >
                   <div>
-                    <span className="text-brand-gold font-semibold uppercase tracking-wider text-[10px] block mb-1">
+                    <span className="font-inter text-[#2D6A6A] font-semibold uppercase tracking-wider text-[11px] block mb-1">
                       {member.city}
                     </span>
-                    <h3 className="font-playfair font-bold text-lg text-brand-navy mb-1">{member.name}</h3>
-                    <p className="text-gray-500 text-xs font-medium mb-4">{member.role}</p>
+                    <h3 className="font-amiri font-bold text-xl text-[#1A1A1A] mb-1">{member.name}</h3>
+                    <p className="font-inter text-[#5C5C5C] text-xs font-medium mb-4">{member.role}</p>
                   </div>
                   {member.phone && (
-                    <div className="flex items-center gap-2 text-brand-teal text-xs border-t border-gray-100 pt-4 mt-2">
+                    <div className="flex items-center gap-2 text-[#1B4D4D] font-inter text-xs border-t border-[#E5E2DA] pt-4 mt-2">
                       <Phone className="w-3.5 h-3.5" />
                       <a href={`tel:${member.phone.replace(/\s/g, '')}`} className="font-mono hover:underline">
                         {member.phone}
@@ -250,31 +234,28 @@ export default function OrganizationPage({ params }: Props) {
             {committees.map((com, idx) => (
               <div
                 key={idx}
-                className="bg-white border border-brand-teal/10 rounded-3xl p-8 shadow-sm flex flex-col justify-between"
+                className="bg-white border border-[#E5E2DA] rounded-xl p-8 shadow-sm flex flex-col justify-between"
               >
                 <div>
-                  <h3 className="font-playfair font-bold text-xl text-brand-teal border-b border-brand-teal/10 pb-4 mb-4">
+                  <h3 className="font-amiri font-bold text-2xl text-[#1B4D4D] border-b border-[#E5E2DA] pb-4 mb-4">
                     {com.title}
                   </h3>
-                  <p className="text-gray-500 text-xs leading-relaxed mb-6">{com.desc}</p>
+                  <p className="font-inter text-[#5C5C5C] text-xs leading-relaxed mb-6">{com.desc}</p>
                   
                   <div className="space-y-4">
                     {com.members.map((mem, i) => (
-                      <div key={i} className="flex flex-col gap-0.5 border-l-2 border-brand-gold/40 pl-3 py-1">
-                        <span className="font-bold text-sm text-brand-navy">{mem.name}</span>
-                        <span className="text-gray-400 text-[10px]">{mem.role}</span>
+                      <div key={i} className="flex flex-col gap-0.5 border-l-2 border-[#1B4D4D] pl-3 py-1">
+                        <span className="font-inter font-bold text-sm text-[#1A1A1A]">{mem.name}</span>
+                        <span className="font-inter text-[#8A8A8A] text-xs">{mem.role}</span>
                         {mem.phone && (
-                          <span className="text-brand-teal font-mono text-[10px] flex items-center gap-1 mt-0.5">
-                            <Phone className="w-2.5 h-2.5" />
+                          <span className="text-[#1B4D4D] font-mono text-xs flex items-center gap-1 mt-0.5">
+                            <Phone className="w-3 h-3" />
                             <a href={`tel:${mem.phone.replace(/\s/g, '')}`}>{mem.phone}</a>
                           </span>
                         )}
                       </div>
                     ))}
                   </div>
-                </div>
-                <div className="mt-8 pt-4 border-t border-gray-100 text-[10px] text-gray-400">
-                  Denetim & Tahkim Emniyet Mekanizması
                 </div>
               </div>
             ))}
@@ -290,17 +271,16 @@ export default function OrganizationPage({ params }: Props) {
           >
             {/* Advisors list */}
             <div>
-              <h3 className="font-playfair font-bold text-xl text-brand-navy mb-6 flex items-center gap-2">
-                <span className="w-1.5 h-4 bg-brand-gold rounded-full" />
+              <h3 className="font-amiri font-bold text-2xl text-[#1A1A1A] mb-6">
                 {locale === 'ar' ? 'مستشارو الرئاسة والاستراتيجية' : 'Baş Danışmanlık ve Üst Düzey Rehberlik'}
               </h3>
               <div className="grid md:grid-cols-3 gap-6">
                 {advisory.advisors.map((adv, idx) => (
-                  <div key={idx} className="bg-white border border-brand-teal/10 rounded-2xl p-6 shadow-sm">
-                    <h4 className="font-playfair font-bold text-base text-brand-navy mb-1">{adv.name}</h4>
-                    <p className="text-gray-500 text-xs font-medium mb-3">{adv.role}</p>
+                  <div key={idx} className="bg-white border border-[#E5E2DA] rounded-xl p-6 shadow-sm">
+                    <h4 className="font-amiri font-bold text-lg text-[#1A1A1A] mb-1">{adv.name}</h4>
+                    <p className="font-inter text-[#5C5C5C] text-xs font-medium mb-3">{adv.role}</p>
                     {adv.phone && (
-                      <span className="text-brand-teal font-mono text-xs flex items-center gap-1.5 border-t border-gray-100 pt-3">
+                      <span className="text-[#1B4D4D] font-mono text-xs flex items-center gap-1.5 border-t border-[#E5E2DA] pt-3">
                         <Phone className="w-3.5 h-3.5" />
                         <a href={`tel:${adv.phone.replace(/\s/g, '')}`}>{adv.phone}</a>
                       </span>
@@ -312,19 +292,18 @@ export default function OrganizationPage({ params }: Props) {
 
             {/* Academic Advisory Board */}
             <div>
-              <h3 className="font-playfair font-bold text-xl text-brand-navy mb-6 flex items-center gap-2">
-                <span className="w-1.5 h-4 bg-brand-gold rounded-full" />
+              <h3 className="font-amiri font-bold text-2xl text-[#1A1A1A] mb-6">
                 {locale === 'ar' ? 'الهيئة الأكاديمية والاتصالات' : 'Danışma Kurulu & Akademik Kapasite'}
               </h3>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {advisory.council.map((mem, idx) => (
-                  <div key={idx} className="bg-white border border-brand-teal/10 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+                  <div key={idx} className="bg-white border border-[#E5E2DA] rounded-xl p-6 shadow-sm flex flex-col justify-between">
                     <div>
-                      <h4 className="font-bold text-brand-navy mb-1">{mem.name}</h4>
-                      <p className="text-gray-500 text-xs font-medium mb-4">{mem.role}</p>
+                      <h4 className="font-amiri font-bold text-lg text-[#1A1A1A] mb-1">{mem.name}</h4>
+                      <p className="font-inter text-[#5C5C5C] text-xs font-medium mb-4">{mem.role}</p>
                     </div>
                     {mem.phone && (
-                      <span className="text-brand-teal font-mono text-xs flex items-center gap-1.5 border-t border-gray-100 pt-3">
+                      <span className="text-[#1B4D4D] font-mono text-xs flex items-center gap-1.5 border-t border-[#E5E2DA] pt-3">
                         <Phone className="w-3.5 h-3.5" />
                         <a href={`tel:${mem.phone.replace(/\s/g, '')}`}>{mem.phone}</a>
                       </span>
@@ -335,29 +314,24 @@ export default function OrganizationPage({ params }: Props) {
             </div>
 
             {/* Spiritual Board */}
-            <div className="bg-brand-navy text-white rounded-3xl p-8 sm:p-12 overflow-hidden relative">
-              <IslamicPattern opacity={0.03} color="white" size={100} />
+            <div className="bg-[#0F2E2E] text-white rounded-xl p-8 sm:p-12 overflow-hidden relative">
+              <IslamicPattern opacity={0.04} color="white" size={100} />
               <div className="relative z-10">
-                <h3 className="font-playfair font-bold text-2xl text-brand-gold mb-4 text-center">
+                <h3 className="font-amiri font-bold text-2xl sm:text-3xl text-white mb-4 text-center">
                   {locale === 'ar' ? 'المجلس الأعلى للاستشارة (شبكة القيم الروحية)' : 'Yüksek İstişare Kurulu ve Manevi Değerler Ağı'}
                 </h3>
-                <p className="text-gray-300 text-xs text-center max-w-2xl mx-auto mb-10 leading-relaxed">
-                  {locale === 'ar'
-                    ? 'يجمع هذا المجلس شيوخ وخلفاء الطرق الروحية المختلفة تحت سقف واحد لتثبيت الاتجاه العام المعنوي للدعوة.'
-                    : 'Vakfın manevi rotasını tayin eden en yüksek istişari organdır. Farklı tasavvufi ekollerin bu çatıda toplanması, vakfa uluslararası ölçekte bir kapsayıcılık kazandırmaktadır.'}
-                </p>
 
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
                   {advisory.spiritual.map((sp, idx) => (
-                    <div key={idx} className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-colors">
-                      <span className="text-brand-gold font-mono text-[9px] uppercase tracking-wider block mb-1">
+                    <div key={idx} className="bg-white/5 border border-white/10 rounded-xl p-5 hover:bg-white/10 transition-colors">
+                      <span className="font-inter text-[#3D8B8B] text-[10px] font-semibold uppercase tracking-wider block mb-1">
                         {sp.lineage}
                       </span>
-                      <h4 className="font-playfair font-bold text-white text-base mb-1">{sp.name}</h4>
-                      <p className="text-gray-400 text-xs mb-3">{sp.role}</p>
+                      <h4 className="font-amiri font-bold text-white text-lg mb-1">{sp.name}</h4>
+                      <p className="font-inter text-white/70 text-xs mb-3">{sp.role}</p>
                       {sp.phone && sp.phone !== '-' && (
-                        <span className="text-brand-goldLight font-mono text-xs flex items-center gap-1.5 border-t border-white/5 pt-3">
-                          <Phone className="w-3.5 h-3.5" />
+                        <span className="font-mono text-white/60 text-xs flex items-center gap-1.5 border-t border-white/10 pt-3">
+                          <Phone className="w-3 h-3 text-[#3D8B8B]" />
                           <a href={`tel:${sp.phone.replace(/\s/g, '')}`}>{sp.phone}</a>
                         </span>
                       )}
@@ -377,14 +351,9 @@ export default function OrganizationPage({ params }: Props) {
             className="space-y-8"
           >
             <div className="text-center max-w-2xl mx-auto mb-8">
-              <h2 className="font-playfair font-bold text-2xl sm:text-3xl text-brand-navy">
+              <h2 className="font-amiri font-bold text-2xl sm:text-3xl text-[#1A1A1A]">
                 {locale === 'ar' ? 'أعضاء الهيئة التأسيسية' : 'Kurucular Kurulu'}
               </h2>
-              <p className="text-gray-500 text-sm mt-2">
-                {locale === 'ar'
-                  ? 'قائمة تضم 75 شخصية بارزة يمثلون قوة الوقف وتنوعه في مجالات العلوم والأعمال والسياسة والفنون.'
-                  : 'Vakfımızın kurucu kadrosu; akademik bilgi üretimi, idari koordinasyon gücü, toplumsal rehberlik ve kamusal nüfuz alanlarını kapsayan hibrit bir yapı sergilemektedir.'}
-              </p>
             </div>
 
             {/* Founder categories tab filters */}
@@ -400,10 +369,10 @@ export default function OrganizationPage({ params }: Props) {
                 <button
                   key={filter.id}
                   onClick={() => setFounderFilter(filter.id as any)}
-                  className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
+                  className={`px-4 py-2 rounded-lg font-inter text-xs font-semibold transition-all ${
                     founderFilter === filter.id
-                      ? 'bg-brand-teal text-white'
-                      : 'bg-white text-gray-600 border border-brand-teal/5 hover:bg-brand-tealLight hover:text-brand-teal'
+                      ? 'bg-[#1B4D4D] text-white'
+                      : 'bg-white text-[#5C5C5C] border border-[#E5E2DA] hover:text-[#1B4D4D]'
                   }`}
                 >
                   {filter.label}
@@ -416,15 +385,15 @@ export default function OrganizationPage({ params }: Props) {
               {filteredFounders.map((founder, idx) => (
                 <div
                   key={idx}
-                  className="bg-white border border-brand-teal/5 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
+                  className="bg-white border border-[#E5E2DA] rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
                 >
                   <div>
-                    <h4 className="font-bold text-brand-navy text-sm mb-1">{founder.name}</h4>
-                    <p className="text-gray-400 text-[10px] mb-3">{founder.desc}</p>
+                    <h4 className="font-amiri font-bold text-[#1A1A1A] text-base mb-1">{founder.name}</h4>
+                    <p className="font-inter text-[#8A8A8A] text-xs mb-3">{founder.desc}</p>
                   </div>
                   {founder.phone && (
-                    <span className="text-brand-teal font-mono text-[10px] flex items-center gap-1 mt-2 border-t border-gray-50 pt-2">
-                      <Phone className="w-2.5 h-2.5" />
+                    <span className="text-[#1B4D4D] font-mono text-xs flex items-center gap-1 mt-2 border-t border-[#E5E2DA] pt-2">
+                      <Phone className="w-3 h-3" />
                       <a href={`tel:${founder.phone.replace(/\s/g, '')}`}>{founder.phone}</a>
                     </span>
                   )}

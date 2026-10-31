@@ -5,10 +5,8 @@ import AboutPreview from '@/components/home/AboutPreview'
 import StatsSection from '@/components/home/StatsSection'
 import LatestNews from '@/components/home/LatestNews'
 import FeaturedArticles from '@/components/home/FeaturedArticles'
-import ActivitiesPreview from '@/components/home/ActivitiesPreview'
-import ScholarsList from '@/components/home/ScholarsList'
-import ContactCTA from '@/components/home/ContactCTA'
-import { getPostsByCategory, getAuthors, CATEGORIES } from '@/lib/wordpress'
+import VolunteerSupportCTA from '@/components/home/VolunteerSupportCTA'
+import { getPostsByCategory, CATEGORIES } from '@/lib/wordpress'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -29,22 +27,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function HomePage({ params }: Props) {
   // Fetch data from WordPress (graceful fallback if not available)
-  const [newsPosts, articlePosts, authors] = await Promise.allSettled([
-    getPostsByCategory(CATEGORIES.GUNDEM, 4),
+  const [newsPosts, articlePosts] = await Promise.allSettled([
+    getPostsByCategory(CATEGORIES.GUNDEM, 3),
     getPostsByCategory(CATEGORIES.MAKALE, 3),
-    getAuthors(),
   ])
 
   return (
     <>
+      {/* 1. Hero Bölümü */}
       <HeroSection />
+
+      {/* 2. Hakkımızda / Biz Kimiz Bölümü */}
       <AboutPreview />
+
+      {/* 4. Asya'da İslam / Etki Alanlarımız Bölümü */}
       <StatsSection />
+
+      {/* 5. Son Gündem Bölümü */}
       <LatestNews posts={newsPosts.status === 'fulfilled' ? newsPosts.value : undefined} />
+
+      {/* 6. Öne Çıkan Makaleler Bölümü */}
       <FeaturedArticles articles={articlePosts.status === 'fulfilled' ? articlePosts.value : undefined} />
-      <ActivitiesPreview />
-      <ScholarsList authors={authors.status === 'fulfilled' ? authors.value : undefined} />
-      <ContactCTA />
+
+      {/* 7. CTA Bölümü — Gönüllü Ol & Destek Ol */}
+      <VolunteerSupportCTA />
     </>
   )
 }

@@ -1,193 +1,179 @@
 'use client'
 
-import { Link } from '@/i18n/routing'
-import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { useTranslations, useLocale } from 'next-intl'
-import { ArrowRight, Clock, User, Tag } from 'lucide-react'
-import SectionTitle from '@/components/ui/SectionTitle'
-import ScrollReveal from '@/components/ui/ScrollReveal'
-import { staggerContainer, itemVariants } from '@/lib/animations'
-import { stripHtml, formatDate } from '@/lib/wordpress'
+import { ArrowRight } from 'lucide-react'
+import { Link } from '@/i18n/routing'
+import IslamicPattern from '@/components/ui/IslamicPattern'
 import type { WPPost } from '@/lib/types'
-
-const MOCK_ARTICLES: WPPost[] = [
-  {
-    id: 10, slug: 'islam-ve-modernite',
-    title: { rendered: 'İslam ve Modernite: Uzlaşma mı, Çatışma mı?' },
-    excerpt: { rendered: '<p>Çağdaş dünyada İslami değerlerin yeri ve önemi üzerine kapsamlı bir inceleme...</p>' },
-    content: { rendered: '' }, date: '2024-11-12T10:00:00', modified: '',
-    categories: [2], tags: [], featured_media: 0, author: 2,
-    acf: { okuma_suresi: '8' },
-    _embedded: {
-      author: [{ id: 2, name: 'Prof. Dr. Ahmet Yıldız', slug: 'ahmet-yildiz', description: '', avatar_urls: { '96': 'https://ui-avatars.com/api/?name=Ahmet+Yildiz&background=0d6e6e&color=fff&size=96' }, acf: { unvan: 'Kelam Profesörü' } }],
-      'wp:featuredmedia': [],
-      'wp:term': [[{ id: 5, name: 'Kelam', slug: 'kelam', taxonomy: 'category' }]]
-    }
-  },
-  {
-    id: 11, slug: 'kuran-yorumlama-metodoloji',
-    title: { rendered: 'Kur\'an Yorumlamada Çağdaş Metodoloji Yaklaşımları' },
-    excerpt: { rendered: '<p>Tefsir ilminde modern dönemde ortaya çıkan yeni yöntemler ve geleneksel anlayışla ilişkisi...</p>' },
-    content: { rendered: '' }, date: '2024-11-08T09:00:00', modified: '',
-    categories: [2], tags: [], featured_media: 0, author: 3,
-    acf: { okuma_suresi: '12' },
-    _embedded: {
-      author: [{ id: 3, name: 'Dr. Fatma Şahin', slug: 'fatma-sahin', description: '', avatar_urls: { '96': 'https://ui-avatars.com/api/?name=Fatma+Sahin&background=1a4a3a&color=fff&size=96' }, acf: { unvan: 'Tefsir Uzmanı' } }],
-      'wp:featuredmedia': [],
-      'wp:term': [[{ id: 6, name: 'Tefsir', slug: 'tefsir', taxonomy: 'category' }]]
-    }
-  },
-  {
-    id: 12, slug: 'fiqh-ve-hukukun-ilkeleri',
-    title: { rendered: 'İslam Hukukunun Temel İlkeleri ve Günümüz Uygulamaları' },
-    excerpt: { rendered: '<p>Fıkıh usulünün modern hukuk sistemleriyle karşılaştırmalı bir analizi...</p>' },
-    content: { rendered: '' }, date: '2024-11-01T08:00:00', modified: '',
-    categories: [2], tags: [], featured_media: 0, author: 4,
-    acf: { okuma_suresi: '10' },
-    _embedded: {
-      author: [{ id: 4, name: 'Doç. Dr. Mehmet Kaya', slug: 'mehmet-kaya', description: '', avatar_urls: { '96': 'https://ui-avatars.com/api/?name=Mehmet+Kaya&background=c9a84c&color=fff&size=96' }, acf: { unvan: 'Fıkıh Araştırmacısı' } }],
-      'wp:featuredmedia': [],
-      'wp:term': [[{ id: 7, name: 'Fıkıh', slug: 'fikh', taxonomy: 'category' }]]
-    }
-  },
-]
-
-const ARTICLE_IMAGES = [
-  'https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=600&q=80',
-  'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&q=80',
-  'https://images.unsplash.com/photo-1524578271613-d550eacf6090?w=600&q=80',
-]
-
-const CATEGORY_COLORS = ['bg-brand-teal', 'bg-brand-emerald', 'bg-brand-gold']
-
-interface ArticleCardProps {
-  post: WPPost
-  index: number
-}
-
-function ArticleCard({ post, index }: ArticleCardProps) {
-  const author = post._embedded?.author?.[0]
-  const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'Makale'
-  const readingTime = post.acf?.okuma_suresi || '7'
-
-  return (
-    <motion.div variants={itemVariants} className="card group flex flex-col overflow-hidden">
-      {/* Category color strip */}
-      <div className={`h-1.5 ${CATEGORY_COLORS[index % CATEGORY_COLORS.length]}`} />
-
-      <div className="relative aspect-video overflow-hidden">
-        <Image
-          src={ARTICLE_IMAGES[index % ARTICLE_IMAGES.length]}
-          alt={post.title.rendered}
-          fill
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
-          sizes="(max-width: 768px) 100vw, 33vw"
-        />
-      </div>
-
-      <div className="p-5 flex flex-col flex-1">
-        {/* Author + category */}
-        <div className="flex items-center justify-between mb-3">
-          {author && (
-            <div className="flex items-center gap-2">
-              <Image
-                src={author.avatar_urls['96']}
-                alt={author.name}
-                width={24}
-                height={24}
-                className="rounded-full"
-                unoptimized
-              />
-              <span className="text-xs text-gray-500 font-medium">{author.name}</span>
-            </div>
-          )}
-          <span className="category-badge text-xs">{category}</span>
-        </div>
-
-        {/* Title */}
-        <Link href={`/makaleler/${post.slug}`}>
-          <h3 className="font-playfair font-semibold text-brand-navy text-lg leading-snug line-clamp-2 group-hover:text-brand-teal transition-colors mb-3">
-            {post.title.rendered}
-          </h3>
-        </Link>
-
-        {/* Excerpt */}
-        <p className="text-gray-500 text-sm line-clamp-2 leading-relaxed flex-1 mb-4">
-          {stripHtml(post.excerpt.rendered)}
-        </p>
-
-        {/* Footer */}
-        <div className="flex items-center justify-between text-xs text-gray-400 pt-3 border-t border-gray-100">
-          <span className="flex items-center gap-1">
-            <Clock className="w-3 h-3" />
-            {readingTime} dk okuma
-          </span>
-          <Link
-            href={`/makaleler/${post.slug}`}
-            className="text-brand-teal font-medium hover:text-brand-tealDark flex items-center gap-1"
-          >
-            Oku <ArrowRight className="w-3 h-3" />
-          </Link>
-        </div>
-      </div>
-    </motion.div>
-  )
-}
 
 interface FeaturedArticlesProps {
   articles?: WPPost[]
 }
 
+const REAL_ARTICLES = [
+  {
+    id: 1,
+    slug: 'islam-ve-modernite-uzlasma-mi-catisma-mi',
+    category: 'KELAM',
+    categoryStyle: 'bg-[rgba(27,77,77,0.08)] text-[#1B4D4D]',
+    title: 'İslam ve Modernite: Uzlaşma mı, Çatışma mı?',
+    summary:
+      'Çağdaş dünyada İslami değerlerin yeri ve önemi üzerine kapsamlı bir inceleme. Ümmetin birliği için entelektüel bir çerçeve önerisi.',
+    author: 'Prof. Dr. Orhan Çeker',
+    initials: 'OÇ',
+    readTime: '8 dk okuma',
+    patternBg: 'from-[#0F2E2E] to-[#1B4D4D]',
+  },
+  {
+    id: 2,
+    slug: 'kuran-yorumlamada-cagdas-metodoloji-yaklasimlari',
+    category: 'TEFSİR',
+    categoryStyle: 'bg-[rgba(45,106,106,0.08)] text-[#2D6A6A]',
+    title: 'Kur\'an Yorumlamada Çağdaş Metodoloji Yaklaşımları',
+    summary:
+      'Tefsir ilminde modern dönemde ortaya çıkan yeni yöntemler ve geleneksel anlayışla ilişkisi üzerine bir değerlendirme.',
+    author: 'Prof. Dr. Saim Ayaz',
+    initials: 'SA',
+    readTime: '12 dk okuma',
+    patternBg: 'from-[#1B4D4D] to-[#2D6A6A]',
+  },
+  {
+    id: 3,
+    slug: 'kore-yarimadasinda-islamin-tarihsel-izleri',
+    category: 'DAVET',
+    categoryStyle: 'bg-[rgba(61,139,139,0.08)] text-[#3D8B8B]',
+    title: 'Kore Yarımadası\'nda İslam\'ın Tarihsel İzleri',
+    summary:
+      '1952\'den günümüze Türk askerinin manevi duruşuyla başlayan ve bugün 21 camiye ulaşan Kore\'deki davet serüvenimiz.',
+    author: 'Doç. Dr. Abdulkadir Turan',
+    initials: 'AT',
+    readTime: '10 dk okuma',
+    patternBg: 'from-[#0F2E2E] to-[#2D6A6A]',
+  },
+]
+
 export default function FeaturedArticles({ articles }: FeaturedArticlesProps) {
-  const t = useTranslations('sections')
+  const t = useTranslations('articles')
   const locale = useLocale()
   const isRTL = locale === 'ar'
-  const displayArticles = (articles && articles.length > 0 ? articles : MOCK_ARTICLES).slice(0, 3)
 
   return (
     <section
-      className="section-padding bg-brand-cream"
+      className="bg-[#F7F5F0] py-[80px] sm:py-[100px] px-4 sm:px-10 lg:px-20 text-[#1A1A1A]"
       aria-label="Öne Çıkan Makaleler"
       dir={isRTL ? 'rtl' : 'ltr'}
     >
-      <div className="container-narrow">
-        <div className="flex items-end justify-between mb-12">
-          <ScrollReveal>
-            <SectionTitle
-              tag="Makaleler"
-              title={t('featuredArticles')}
-              align="left"
-            />
-          </ScrollReveal>
-          <ScrollReveal delay={0.2}>
-            <Link
-              href="/makaleler"
-              className="hidden sm:flex items-center gap-2 text-brand-teal font-semibold hover:text-brand-tealDark transition-colors group text-sm"
-            >
-              {t('viewAll')}
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </ScrollReveal>
-        </div>
+      <div className="max-w-[1240px] mx-auto">
+        
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+          <div>
+            <span className="font-inter text-[12px] font-semibold tracking-[0.1em] text-[#2D6A6A] uppercase">
+              {t('tag')}
+            </span>
+            <h2 className="font-amiri text-[32px] sm:text-[38px] font-bold text-[#1A1A1A] mt-2">
+              {t('title')}
+            </h2>
+            <p className="font-inter text-[16px] font-normal text-[#5C5C5C] mt-2 max-w-xl">
+              {t('subtitle')}
+            </p>
+          </div>
 
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {displayArticles.map((article, i) => (
-            <ArticleCard key={article.id} post={article} index={i} />
-          ))}
-        </motion.div>
-
-        <div className="sm:hidden text-center mt-8">
-          <Link href="/makaleler" className="btn-teal">
-            {t('viewAll')} <ArrowRight className="w-4 h-4" />
+          <Link
+            href="/makaleler"
+            className="group inline-flex items-center gap-1.5 font-inter text-[15px] font-semibold text-[#1B4D4D] hover:text-[#2D6A6A] transition-colors self-start sm:self-auto"
+          >
+            <span>{t('viewAll')}</span>
+            <ArrowRight className="w-4 h-4 text-[#1B4D4D] group-hover:translate-x-1 transition-transform duration-200" />
           </Link>
         </div>
+
+        {/* 3 Makale Kartı Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+          {REAL_ARTICLES.map((article, index) => (
+            <motion.div
+              key={article.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.7, delay: index * 0.12, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="group bg-[#FFFFFF] rounded-[12px] overflow-hidden border border-[#E5E2DA] hover:translate-y-[-4px] hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+            >
+              <div>
+                {/* Visual Area (200px) with hover scale */}
+                <div
+                  className={`h-[200px] w-full bg-gradient-to-br ${article.patternBg} relative flex items-center justify-center overflow-hidden p-6`}
+                >
+                  <IslamicPattern opacity={0.12} color="#FFFFFF" size={60} />
+                  
+                  {/* Inner card graphic with scale(1.03) on card hover */}
+                  <div className="relative z-10 text-center transition-transform duration-400 ease-out group-hover:scale-[1.03]">
+                    <div className="w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-2 backdrop-blur-sm shadow-inner">
+                      <span className="font-amiri text-white text-xl font-bold">
+                        {article.category}
+                      </span>
+                    </div>
+                    <span className="font-inter text-white/75 text-[11px] uppercase tracking-widest">
+                      İslami Davet Vakfı Külliyatı
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content Padding */}
+                <div className="p-6">
+                  {/* Category Pill */}
+                  <span
+                    className={`font-inter text-[11px] font-semibold tracking-[0.05em] px-2.5 py-1 rounded inline-block uppercase ${article.categoryStyle}`}
+                  >
+                    {article.category}
+                  </span>
+
+                  {/* Title */}
+                  <Link href={`/makaleler/${article.slug}`}>
+                    <h3 className="font-amiri text-[20px] font-semibold text-[#1A1A1A] leading-snug mt-3 group-hover:text-[#1B4D4D] transition-colors">
+                      {article.title}
+                    </h3>
+                  </Link>
+
+                  {/* Summary */}
+                  <p className="font-inter text-[15px] font-normal leading-[1.6] text-[#5C5C5C] mt-2 line-clamp-2">
+                    {article.summary}
+                  </p>
+                </div>
+              </div>
+
+              {/* Bottom Row: Author + Reading Time + Read Link */}
+              <div className="px-6 pb-6 pt-4 border-t border-[#E5E2DA] flex items-center justify-between mt-4">
+                {/* Author with circular avatar */}
+                <div className="flex items-center gap-2.5">
+                  <div className="w-10 h-10 rounded-full bg-[#1B4D4D] text-white flex items-center justify-center font-inter text-[14px] font-bold shadow-sm flex-shrink-0">
+                    {article.initials}
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-inter text-[14px] font-semibold text-[#1A1A1A] leading-tight">
+                      {article.author}
+                    </span>
+                    <span className="font-inter text-[12px] font-normal text-[#8A8A8A] mt-0.5">
+                      {article.readTime}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Read Button */}
+                <Link
+                  href={`/makaleler/${article.slug}`}
+                  className="inline-flex items-center gap-1 font-inter text-[14px] font-semibold text-[#1B4D4D] hover:text-[#2D6A6A] transition-colors"
+                >
+                  <span>{t('read')}</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-[#1B4D4D] group-hover:translate-x-1 transition-transform duration-200" />
+                </Link>
+              </div>
+
+            </motion.div>
+          ))}
+        </div>
+
       </div>
     </section>
   )
