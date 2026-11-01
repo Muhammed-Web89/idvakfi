@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useTranslations, useLocale } from 'next-intl'
-import { Users, Heart, ArrowRight } from 'lucide-react'
+import { Users, Heart, ArrowRight, Sparkles } from 'lucide-react'
 import { Link } from '@/i18n/routing'
 import IslamicPattern from '@/components/ui/IslamicPattern'
 
@@ -13,94 +13,82 @@ export default function VolunteerSupportCTA() {
 
   return (
     <section
-      className="relative py-[80px] sm:py-[100px] px-4 sm:px-10 lg:px-20 bg-[linear-gradient(135deg,#1B4D4D_0%,#0F2E2E_100%)] text-white overflow-hidden"
+      className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#090D12] text-[#F0F6FC] overflow-hidden border-t border-white/5"
       aria-label="Gönüllü Ol ve Destek Ol"
       dir={isRTL ? 'rtl' : 'ltr'}
     >
-      {/* Subtle Islamic pattern */}
-      <IslamicPattern opacity={0.05} color="#FFFFFF" size={90} />
+      <IslamicPattern opacity={0.03} color="#00D4B2" size={90} />
 
-      <div className="relative max-w-[1240px] mx-auto">
+      <div className="relative max-w-[1240px] mx-auto z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
-          {/* Left Card — Gönüllü Ol (Padding 40px, bg-white/[0.06], rounded 12px) */}
+          {/* Card 1: Gönüllü Ol */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="bg-white/[0.06] backdrop-blur-[10px] border border-white/10 rounded-[12px] p-8 sm:p-10 flex flex-col justify-between hover:translate-y-[-4px] transition-all duration-300"
+            transition={{ duration: 0.6 }}
+            className="glass-card p-8 sm:p-10 flex flex-col justify-between group hover:border-[#00D4B2]/40"
           >
             <div>
-              {/* Icon (40px) */}
-              <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center mb-5">
-                <Users className="w-5 h-5 text-white" />
+              <div className="w-12 h-12 rounded-xl bg-[#00D4B2]/15 border border-[#00D4B2]/30 flex items-center justify-center mb-6 text-[#00D4B2]">
+                <Users className="w-6 h-6" />
               </div>
 
-              {/* Title (Amiri 24px 700) */}
-              <h3 className="font-amiri text-[24px] font-bold text-white">
+              <h3 className="text-2xl font-bold text-[#F0F6FC] mb-3">
                 {t('volunteerTitle')}
               </h3>
 
-              {/* Description (Inter 15px 400, color rgba(255,255,255,0.8), line-height 1.6, max-width 400px) */}
-              <p className="font-inter text-[15px] font-normal leading-[1.6] text-white/80 max-w-[400px] mt-3">
+              <p className="text-sm text-[#94A3B8] leading-[1.8] max-w-md">
                 {t('volunteerDesc')}
               </p>
             </div>
 
-            {/* Button (padding 12px 24px) */}
-            <div className="mt-8 pt-2">
+            <div className="mt-8 pt-4">
               <Link
-                href="/iletisim"
-                className="group inline-flex items-center gap-2 bg-[#FFFFFF] hover:bg-[#F7F5F0] text-[#1B4D4D] font-inter text-[15px] font-semibold px-6 py-3 rounded-[6px] transition-all duration-200"
+                href="/uyelik"
+                className="btn-turquoise group inline-flex"
               >
                 <span>{t('volunteerBtn')}</span>
-                <ArrowRight className="w-4 h-4 text-[#1B4D4D] group-hover:translate-x-1 transition-transform duration-200" />
+                <ArrowRight className={`w-4 h-4 transition-transform duration-200 ${isRTL ? 'rotate-180 group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`} />
               </Link>
             </div>
           </motion.div>
 
-          {/* Right Card — Destek Ol (Padding 40px, bg-white/[0.06], rounded 12px) */}
+          {/* Card 2: Destek Ol / Bağış */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="bg-white/[0.06] backdrop-blur-[10px] border border-white/10 rounded-[12px] p-8 sm:p-10 flex flex-col justify-between hover:translate-y-[-4px] transition-all duration-300"
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="glass-card p-8 sm:p-10 flex flex-col justify-between group hover:border-[#33DEC5]/40"
           >
             <div>
-              {/* Icon (40px) */}
-              <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center mb-5">
-                <Heart className="w-5 h-5 text-white" />
+              <div className="w-12 h-12 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center mb-6 text-[#33DEC5]">
+                <Heart className="w-6 h-6" />
               </div>
 
-              {/* Title (Amiri 24px 700) */}
-              <h3 className="font-amiri text-[24px] font-bold text-white">
+              <h3 className="text-2xl font-bold text-[#F0F6FC] mb-3">
                 {t('supportTitle')}
               </h3>
 
-              {/* Description (Inter 15px 400, color rgba(255,255,255,0.8), line-height 1.6, max-width 400px) */}
-              <p className="font-inter text-[15px] font-normal leading-[1.6] text-white/80 max-w-[400px] mt-3">
+              <p className="text-sm text-[#94A3B8] leading-[1.8] max-w-md">
                 {t('supportDesc')}
               </p>
 
-              {/* Bank Info (Inter 13px 400, font-mono, bg rgba(0,0,0,0.15), padding 10px 14px, rounded 6px, margin-top 16px) */}
-              <div className="bg-black/15 border border-white/10 rounded-[6px] px-3.5 py-2.5 mt-4">
-                <p className="font-mono text-[13px] font-normal text-white/50 select-all leading-tight">
-                  {t('bankInfo')}
-                </p>
+              <div className="mt-4 p-3 rounded-lg bg-[#080C10] border border-white/10 text-xs font-mono text-[#00D4B2]">
+                {t('bankInfo')}
               </div>
             </div>
 
-            {/* Button (padding 12px 24px, bg transparent, border 1px rgba(255,255,255,0.3)) */}
-            <div className="mt-8 pt-2">
-              <Link
-                href="/kurumsal"
-                className="group inline-flex items-center gap-2 bg-transparent hover:bg-white/10 text-[#FFFFFF] border border-white/30 hover:border-white font-inter text-[15px] font-semibold px-6 py-3 rounded-[6px] transition-all duration-200"
+            <div className="mt-8 pt-4">
+              <a
+                href="#hizli-bagis"
+                className="btn-glass group inline-flex"
               >
                 <span>{t('supportBtn')}</span>
-                <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform duration-200" />
-              </Link>
+                <ArrowRight className={`w-4 h-4 text-[#00D4B2] transition-transform duration-200 ${isRTL ? 'rotate-180 group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`} />
+              </a>
             </div>
           </motion.div>
 

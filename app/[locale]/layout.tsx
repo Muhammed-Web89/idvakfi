@@ -36,8 +36,8 @@ export default async function RootLayout({ children, params }: Props) {
   const isRTL = locale === 'ar'
 
   return (
-    <html lang={locale} dir={isRTL ? 'rtl' : 'ltr'} className="scroll-smooth">
-      <body className="min-h-screen flex flex-col bg-[#F7F5F0] text-[#1A1A1A] font-inter antialiased">
+    <html lang={locale} dir={isRTL ? 'rtl' : 'ltr'} className="scroll-smooth dark">
+      <body className="min-h-screen flex flex-col bg-[#080C10] text-[#F0F6FC] font-inter antialiased selection:bg-[#00D4B2]/30 selection:text-[#00D4B2]">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Navbar />
           <main className="flex-1">{children}</main>

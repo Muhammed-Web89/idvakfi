@@ -6,44 +6,65 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        'primary-green': '#1B4D4D',
-        'primary-green-light': '#2D6A6A',
-        'primary-green-dark': '#0F2E2E',
-        'primary-green-muted': '#3D8B8B',
-        'bg-cream': '#F7F5F0',
-        'bg-white': '#FFFFFF',
-        'bg-dark-section': '#1B4D4D',
-        'text-primary': '#1A1A1A',
-        'text-secondary': '#5C5C5C',
-        'text-muted': '#8A8A8A',
-        'border-light': '#E5E2DA',
-        'border-green': '#2D6A6A',
-        // Semantic aliases
-        brand: {
-          green: '#1B4D4D',
-          greenLight: '#2D6A6A',
-          greenDark: '#0F2E2E',
-          greenMuted: '#3D8B8B',
-          cream: '#F7F5F0',
-        }
+        // Dark theme backgrounds
+        'dark-bg': '#080C10',
+        'dark-surface': '#0D1117',
+        'dark-card': '#121820',
+        'dark-card-hover': '#16202A',
+        'dark-border': '#1F2937',
+
+        // Primary Accent: Canlı Turkuaz (Turquoise)
+        turquoise: {
+          50: '#E6FAF7',
+          100: '#CCF5EF',
+          200: '#99EBDF',
+          300: '#66E0CE',
+          400: '#26D4BE',
+          500: '#00D4B2', // Main primary accent
+          600: '#00B395',
+          700: '#008C75',
+          800: '#006655',
+          900: '#004035',
+        },
+        'primary-turquoise': '#00D4B2',
+        'primary-turquoise-light': '#33DEC5',
+        'primary-turquoise-dark': '#00A389',
+
+        // Text colors
+        'text-dark-primary': '#F0F6FC',
+        'text-dark-secondary': '#94A3B8',
+        'text-dark-muted': '#64748B',
+
+        // Legacy compatibility
+        'primary-green': '#00D4B2',
+        'primary-green-light': '#33DEC5',
+        'primary-green-dark': '#0D1117',
+        'bg-cream': '#0D1117',
       },
       fontFamily: {
         amiri: ['var(--font-amiri)', 'Amiri', 'serif'],
-        inter: ['var(--font-inter)', 'Inter', 'sans-serif'],
-        sans: ['var(--font-inter)', 'Inter', 'sans-serif'],
-        serif: ['var(--font-amiri)', 'Amiri', 'serif'],
+        inter: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
         arabic: ['var(--font-arabic)', 'Noto Naskh Arabic', 'serif'],
       },
-      animation: {
-        'bounce-slow': 'bounce 2s infinite',
-        'spin-slow': 'spin 60s linear infinite',
+      boxShadow: {
+        'glow-turquoise': '0 0 25px rgba(0, 212, 178, 0.25)',
+        'glow-turquoise-lg': '0 0 40px rgba(0, 212, 178, 0.35)',
+        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
       },
-      backgroundImage: {
-        'hero-gradient': 'linear-gradient(135deg, #0F2E2E 0%, #1B4D4D 50%, #2D6A6A 100%)',
-        'cta-gradient': 'linear-gradient(135deg, #1B4D4D 0%, #0F2E2E 100%)',
+      animation: {
+        'float-slow': 'float 6s ease-in-out infinite',
+        'pulse-subtle': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-8px)' },
+        },
       },
     },
   },

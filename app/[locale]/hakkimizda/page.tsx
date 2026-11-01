@@ -2,10 +2,25 @@
 
 import { useState, use } from 'react'
 import { motion } from 'framer-motion'
-import { useTranslations, useLocale } from 'next-intl'
-import { Compass, Shield, Users, Award, ChevronDown, CheckCircle2 } from 'lucide-react'
+import { useLocale } from 'next-intl'
+import {
+  Target,
+  Shield,
+  Compass,
+  Users,
+  CheckCircle2,
+  BookOpen,
+  Scale,
+  Building,
+  HeartHandshake,
+  TrendingUp,
+  FileText,
+  Sparkles,
+  ArrowRight
+} from 'lucide-react'
 import IslamicPattern from '@/components/ui/IslamicPattern'
 import SectionTitle from '@/components/ui/SectionTitle'
+import { Link } from '@/i18n/routing'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -13,275 +28,334 @@ type Props = {
 
 export default function AboutPage({ params }: Props) {
   const { locale } = use(params)
-  const t = useTranslations('about')
   const isRTL = locale === 'ar'
-  
-  // Accordion state
-  const [activeAccordion, setActiveAccordion] = useState<number | null>(0)
+  const [activeTab, setActiveTab] = useState<'purpose' | 'principles'>('purpose')
 
-  const principles = [
+  const amaclar = [
     {
+      num: '01',
+      title: isRTL ? 'وحدة الأمة والاعتصام بالكتاب والسنة' : 'Ümmetin Birliği ve Kur\'an-Sünnet Ölçüsü',
+      desc: isRTL
+        ? 'الاهتمام بوحدة الأمة وتماسك أبنائها وتضافر جهود أعضائها، واعتماد القرآن والسنة كمعيار مطلق في كافة الأنشطة والمواقف.'
+        : 'Ümmetin birliğini, milletin beraberliğini, üyelerinin güç birliğini ve iş birliğini önemser. Kur\'an ve Sünneti çalışmalarında yegane ölçü olarak kabul eder.',
+      icon: Target,
+    },
+    {
+      num: '02',
+      title: isRTL ? 'المؤسسية والمحبة وحرية الفكر' : 'Sevgi Merkezli Sistem ve İstişare Hürriyeti',
+      desc: isRTL
+        ? 'بناء جماعة راقية ذات مبادئ ترتكز على المحبة والتآلف، دون ارتهان للأشخاص، مع إرساء نظام مؤسسي يستند إلى الشورى وصيانة حرية الفكر والتجديد البنّاء.'
+        : 'İslami Davet Vakfı sevgi merkezli, kaliteli, ilkeli bir topluluk oluşturmaya çalışır. Kişilere bağlı kalmaz, bir sistem içinde çalışmalarını tamamlar. İstişareyi esas alır ve daima her işini istişare ile alınan kararlara göre yürütür. Herkes için fikir hürriyetini savunur, düşüncede gelişim ve değişimi teşvik eder. Birleştirici olur; ayrımcı, dışlayıcı ve ötekileştirici yaklaşımlardan uzak durur.',
       icon: Compass,
-      title: locale === 'ar' ? 'فلسفة الوجود' : 'Varlık Felsefesi',
-      text: locale === 'ar'
-        ? 'يقوم وقف الدعوة الإسلامية الدولي ببناء فلسفة وجوده على توليفة متطورة تجمع بين القيم الإسلامية العالمية وانضباط الإدارة الاستراتيجية الحديثة.'
-        : 'Uluslararası İslami Davet Vakfı, varlık felsefesini evrensel İslami değerler ile modern stratejik yönetim disiplininin sofistike bir sentezi üzerine kurgulamıştır.',
-      size: 'col-span-1 md:col-span-2'
     },
     {
-      icon: Shield,
-      title: locale === 'ar' ? 'الرسالة الأساسية والقيادة' : 'Temel Misyon ve Liderlik',
-      text: locale === 'ar'
-        ? 'تتمثل رسالتنا في جعل توجيه القرآن والسنة ليس مجرد مرجع روحي بل معيار أداء تشغيلي (KPI) لتحقيق وحدة الأمة واستدامة القيادة.'
-        : 'Vakfın temel misyonu, ümmetin birliği ve üyelerin stratejik iş birliği hedefleri doğrultusunda, Kuran ve Sünnet rehberliğini sadece manevi bir referans değil, aynı zamanda operasyonel bir performans ölçütü (KPI) olarak konumlandırmaktır.',
-      size: 'col-span-1'
-    },
-    {
+      num: '03',
+      title: isRTL ? 'التواصل مع القيادات الفكرية والعلمية' : 'İlim, İrfan ve Fikir Önderleri ile Temas',
+      desc: isRTL
+        ? 'التواصل البنّاء مع العلماء، والمفكرين، والأدباء، والرموز الاقتصادية والاجتماعية في أمتنا لتوحيد الرؤى والجهود.'
+        : 'Ülkemizin ve İslam dünyasının ileri gelenleri ile görüşmeyi önemser (Âlimler, arifler, şairler, yazarlar, düşünürler, iktisadi ve içtimai kanaat önderleri ile periyodik temaslar kurar).',
       icon: Users,
-      title: locale === 'ar' ? 'التركيز على النظام' : 'Sistem Odaklılık',
-      text: locale === 'ar'
-        ? 'يقضي الوقف على مخاطر الارتباط بالأشخاص السائدة في المؤسسات التقليدية من خلال تطبيق استراتيجية "التركيز على النظام".'
-        : 'Vakıf, geleneksel yapılarda sıkça görülen "kişilere bağımlılık" riskini, "sistem odaklılık" stratejisi ile bertaraf etmiştir.',
-      size: 'col-span-1'
     },
     {
-      icon: Award,
-      title: locale === 'ar' ? 'الهيكل المستدام' : 'Sürdürülebilir Yapı',
-      text: locale === 'ar'
-        ? 'بفضل مأسسة الذاكرة التنظيمية، يبني الوقف هيكلاً مستداماً قادراً على البقاء مستقلاً عن الأفراد ويحول وعي الأمة إلى انضباط جماعي.'
-        : 'Kurumsal hafızanın kurumsallaşması sayesinde vakıf, bireylerin varlığından bağımsız, kendi kendini idame ettirebilen ve ümmet bilincini kolektif bir disipline dönüştüren sürdürülebilir bir yapı inşa etmiştir.',
-      size: 'col-span-1 md:col-span-2'
-    }
+      num: '04',
+      title: isRTL ? 'إسناد حركات الدعوة العالمية' : 'Küresel Davetçilere ve Kurumlara Destek',
+      desc: isRTL
+        ? 'دعم الدعاة والمؤسسات الدعوية في أرجاء العالم الإسلامي، والمشاركة الفاعلة في المشاريع المشتركة المتوافقة مع أهداف الوقف.'
+        : 'İslam coğrafyasındaki davetçileri, davet çalışmalarını ve davet için gayret gösteren kurumları destekler. İlkelerine ve amacına uygun çalışmalara katılır, ortak projeler geliştirir.',
+      icon: BookOpen,
+    },
+    {
+      num: '05',
+      title: isRTL ? 'المناسبات الاجتماعية ومواسم التآلف' : 'Özel Günler, Sohbet ve İkram Kültürü',
+      desc: isRTL
+        ? 'استثمار الأعياد والمناسبات الاجتماعية (الأفراح، الجنائز، اللقاءات الدورية) وتوظيف الضيافة كجسر للتعارف والتآخي.'
+        : 'Özel günleri değerlendirir (Düğün, cenaze, bayram, kandil vb. toplantıları). Sohbeti, muhabbeti ve ikramı üyeler arasında tanışmaya ve kaynaşmaya vesile kabul eder.',
+      icon: HeartHandshake,
+    },
+    {
+      num: '06',
+      title: isRTL ? 'مناهضة الموبقات والآفات المجتمعية' : 'Büyük Günahlarla ve Ahlaki Yozlaşmayla Mücadele',
+      desc: isRTL
+        ? 'التعاون مع كافة الفاعلين لمكافحة الآفات المدمرة كالمسكرات، والقمار، والفواحش، والربا، والرشوة صيانةً للأخلاق العامة.'
+        : 'Birlikte çalıştığı tüm şahıs ve kurumlarla; başta içki, kumar, zina, faiz, rüşvet olmak üzere büyük günahlara ve toplumsal yozlaşmaya karşı kararlılıkla mücadele eder.',
+      icon: Shield,
+    },
+    {
+      num: '07',
+      title: isRTL ? 'الاستقلال المالي والمنشآت الاقتصادية' : 'İktisadi Bağımsızlık ve Vakıf İktisadi İşletmeleri',
+      desc: isRTL
+        ? 'السعي لتأسيس مشروعات اقتصادية وأوقاف استثمارية ذاتية تضمن استدامة الموارد وتغطية نفقات الدعوة باستقلالية تامة.'
+        : 'Vakfın iktisadi kuruluşları olsun ister ve tüm faaliyet giderlerini bu öz kaynaklardan karşılamayı planlayarak tam finansal bağımsızlığı hedefler.',
+      icon: TrendingUp,
+    },
+    {
+      num: '08',
+      title: isRTL ? 'التنسيق والتكامل المؤسسي' : 'Yerel ve Merkezi Yönetimlerle Sağlıklı Diyalog',
+      desc: isRTL
+        ? 'بناء حوار إيجابي مع الإدارات المحلية والمركزية، ومشاركة ثمرات الدراسات والخبرات لخدمة الصالح العام.'
+        : 'Yerel ve merkezi yönetimler ile yapıcı ve şeffaf diyaloglar kurar, tebliğ ve sivil toplum sahasındaki çalışmalarını paylaşır.',
+      icon: Building,
+    },
+    {
+      num: '09',
+      title: isRTL ? 'رعاية الإخوة وحماية المتضررين' : 'Mağdur Üyelerin Korunması ve Sosyal Taziye',
+      desc: isRTL
+        ? 'حماية العضو المتضرر تحت أي ظرف، والعمل على سد احتياجاته وصون كرامته في إطار التكافل الأخوي.'
+        : 'Her şart altında üyelerinden mağdur olanı korur, ihtiyacını karşılamaya çalışır ve kardeşlik hukukunun gereğini eksiksiz yerine getirir.',
+      icon: CheckCircle2,
+    },
+    {
+      num: '10',
+      title: isRTL ? 'التقييم المؤسسي وروح الأخوة' : 'Ölçme, Değerlendirme ve Hiyerarşik Kardeşlik Hukuku',
+      desc: isRTL
+        ? 'إصدار تقارير تقييم دورية لأداء الأعضاء السنوي، مع اعتماد روح الأخوة بدلاً من علاقات الرؤساء والمرؤوسين الجافة.'
+        : 'Üyelerinin yıl içindeki çalışmalarını görür, ölçme-değerlendirme raporları çıkarır. Kurumun hiyerarşik bir tüzük yapısı vardır; ancak ast-üst ilişkisi yerine daima samimi kardeşlik hukukunu gözetir.',
+      icon: Scale,
+    },
+    {
+      num: '11',
+      title: isRTL ? 'الشراكات الاقتصادية والتعاون الشامل' : 'Kardeş Kuruluşlarla İktisadi ve İdari İş Birliği',
+      desc: isRTL
+        ? 'التعاون مع المؤسسات الشقيقة في المجالات العلمية، والدعوية، والإدارية، والاتفاق على تسهيلات تجارية متبادلة للأعضاء.'
+        : 'İslami Davet Vakfı kardeş kuruluşlarla ilmi, İslami, iktisadi, idari ve sosyal çalışmalarda tam iş birliği yapar. Üyelerinin ve kardeş kurumların ticari teşebbüslerine yönelik indirimler ve iktisadi dayanışma ağları kurar.',
+      icon: FileText,
+    },
   ]
 
-  const governance = [
+  const ilkeler = [
     {
-      title: locale === 'ar' ? 'التنمية والاستقرار' : 'İstikrar İçinde Gelişim',
-      desc: locale === 'ar'
-        ? 'يتبع الوقف استراتيجية إدارة ديناميكية تتجنب الركود الناجم عن الوضع الراهن، مع مراعاة مبدأ "التنمية والاستقرار" في صنع القرار.'
-        : 'Vakıf, kurumsal karar alma süreçlerinde "istikrar içinde gelişim" prensibini gözeterek, statükonun getirdiği ataletten kaçınan dinamik bir yönetişim stratejisi izlemektedir.'
+      id: 1,
+      title: isRTL ? 'معيار الكتاب والسنة' : 'Kur\'an ve Sünnet Ölçüsü',
+      desc: isRTL
+        ? 'يحق لكل من يجعل القرآن والسنة مقياساً في حياته ويحمل هم الدعوة أن ينال شرف عضوية الوقف.'
+        : 'Hayatında Kur\'an ve Sünneti ölçü alan ve daveti önemseyen herkes İslami Davet Vakfı\'na üye olabilir.',
     },
     {
-      title: locale === 'ar' ? 'آلية الاستشارة (الشورى)' : 'İstişare Mekanizması',
-      desc: locale === 'ar'
-        ? 'تمثل الاستشارة جوهر هذه الاستراتيجية كمرشح للعقل الجماعي، وهي البروتوكول الأساسي لنموذج الحوكمة المرن.'
-        : 'Bu stratejinin kalbinde, bir "Kolektif Akıl Filtresi" olarak işlev gören istişare mekanizması yer almaktadır. "İstişare", vakıf için yalnızca bir danışma süreci değil, "Çevik Yönetişim" anlayışının temel protokolüdür.'
+      id: 2,
+      title: isRTL ? 'صيانة الدين والوطن والأمة' : 'Dine, Vatana ve Millete Sahip Çıkma',
+      desc: isRTL
+        ? 'أعضاء الوقف يحمون دينهم ووطنهم وأمتهم، ويعتبرون ذلك ثابتاً وقيمة عليا مشتركة.'
+        : 'İslami Davet Vakfı üyeleri dinine, vatanına, milletine sahip çıkar ve bunu vazgeçilmez bir ortak değer kabul eder.',
     },
     {
-      title: locale === 'ar' ? 'حرية الفكر والتحسين المستمر' : 'Fikir Hürriyeti ve Kaizen',
-      desc: locale === 'ar'
-        ? 'يضمن الوقف حرية الفكر لمنع الوقوع في فخ التفكير الجماعي، محولاً الأفكار الفردية إلى قيمة مؤسسية مضافة وفلسفة تحسين مستمر.'
-        : 'Fikir hürriyetinin kurumsal bir güvence altına alınması, üyelerin düşünsel gelişimini destekleyerek statükoyu reddeder ve "Sürekli İyileştirme" (Kaizen) felsefesini organizasyonun genetiğine işler.'
+      id: 3,
+      title: isRTL ? 'نظام التزكية بالمرجعيات' : 'İki Eski Üye Referansı Kriteri',
+      desc: isRTL
+        ? 'يتقدم كل عضو جديد بطلب العضوية مقروناً بتزكية اثنين من الأعضاء القدامى لحفظ نقاء الصف.'
+        : 'Her yeni üye iki eski üyenin referansı ile üyeliğe müracaat eder; kurumsal nitelik ve güven bu yolla teminat altına alınır.',
     },
     {
-      title: locale === 'ar' ? 'بناء مجتمع نوعي ومبدئي' : 'İlkeli Topluluk Hedefi',
-      desc: locale === 'ar'
-        ? 'الهدف من هذا العمق الفكري والنضج المنهجي هو بناء مجتمع نوعي ومبدئي يحدد جودة شبكة العلاقات الاستراتيجية مع العالم الخارجي.'
-        : 'Kaliteli ve ilkeli bir topluluk oluşturma hedefi, bu entelektüel hürriyet ve değişim vizyonuyla mümkün kılınmakta; dış dünyadaki paydaşlarla kurulan stratejik ağın niteliğini belirlemektedir.'
-    }
-  ]
-
-  const memberTraits = [
-    {
-      category: locale === 'ar' ? 'السمات الأخلاقية والروحية' : 'Ahlaki ve Manevi Vasıflar',
-      items: locale === 'ar' ? [
-        'الالتزام التام بالفرائض واجتناب الكبائر (كالربا والرشوة وسوء الخلق)',
-        'الصدق والأمانة والإخلاص في القول والعمل والسر والعلن',
-        'التحلي بروح الأخوة الإيمانية والتسامح وتجنب الجدال والخصومة',
-        'الحفاظ على السرية وحماية خصوصية الدعاة والكوادر الميدانية'
-      ] : [
-        'Farzlara tam riayet etmek ve büyük günahlardan (faiz, rüşvet, ahlaki zaaflar) kesinlikle uzak durmak.',
-        'Sözünde ve işinde sıdk, emanet ve ihlas üzere hareket etmek.',
-        'Kardeşlik hukukunu gözetmek, gıybet ve münakaşadan kaçınarak hüsn-ü zannı esas almak.',
-        'Vakfın kurumsal mahremiyetine ve davet kadrolarının bilgilerine sadakatle riayet etmek.'
-      ]
+      id: 4,
+      title: isRTL ? 'تعهد ضم كفاءات جديدة سنوياً' : 'Yılda En Az 3 Yeni Üye Kazandırma',
+      desc: isRTL
+        ? 'يتعهد كل عضو بالسعي المخلص لجلب 3 أعضاء أكفاء جدد على الأقل سنوياً لتوسيع دائرة الخير.'
+        : 'Vakfın her üyesi yılda en az 3 yeni nitelikli üye getirmeyi kabul ve taahhüt ederek teşkilatı dinamik tutar.',
     },
     {
-      category: locale === 'ar' ? 'الكفاءة والمسؤولية التنظيمية' : 'Liyakat ve Teşkilat Bilinci',
-      items: locale === 'ar' ? [
-        'امتلاك ثقافة العمل المؤسسي والانضباط ضمن الهيكل التنظيمي للوقف',
-        'المشاركة الفعالة في جلسات الاستشارة وتقديم الرأي الصادق دون تردد',
-        'الاستعداد للتعلم المستمر واكتساب المهارات الحديثة واللغات الحية',
-        'الالتزام بواجبات التكليف والمسؤوليات الميدانية الموكلة بدقة'
-      ] : [
-        'Kurumsal aidiyet şuuruna sahip olmak ve hiyerarşik intizama riayet etmek.',
-        'İstişare süreçlerine aktif katılmak ve yapıcı eleştirileri dürüstçe sunmak.',
-        'Sürekli öğrenmeye açık olmak, yabancı dil ve modern iletişim araçlarını davet gayesiyle öğrenmek.',
-        'Üzerine aldığı vazife ve sorumlulukları zamanında ve mükemmeliyet anlayışıyla yerine getirmek.'
-      ]
+      id: 5,
+      title: isRTL ? 'المشاركة الفاعلة والوفاء بالواجبات' : 'Çalışmalara Katılım ve Vazife Sorumluluğu',
+      desc: isRTL
+        ? 'حضور أنشطة الوقف وأداء المهام الموكلة للعضو واجب تنظيمي وأخلاقي لا تهاون فيه.'
+        : 'İslami Davet Vakfı\'nın çalışmalarını önemseyip katılmak ve verilecek vazifeleri eksiksiz yerine getirmek üyelerimiz için zorunludur.',
     },
     {
-      category: locale === 'ar' ? 'الوعي الاجتماعي والعمل التطوعي' : 'Sosyal Sorumluluk ve Dayanışma',
-      items: locale === 'ar' ? [
-        'الاستعداد لخدمة الأمة وبذل الجهد والمال في مشاريع الدعوة والإغاثة',
-        'دعم ومساندة الإخوة في الوقف وقت الأزمات والشدائد ضمن نظام التكافل',
-        'بناء جسور التواصل الإيجابي مع فئات المجتمع المختلفة والشباب',
-        'التحلي بروح المبادرة والإيجابية في مواجهة التحديات المعاصرة'
-      ] : [
-        'Ümmetin dertleriyle dertlenmek, fedakarlık ve infak ahlakını canlı tutmak.',
-        'İçsel dayanışma ve sigorta sistemi çerçevesinde ihtiyaç sahibi üyelere sahip çıkmak.',
-        'Gençlerle ve toplumun farklı kesimleriyle yapıcı, kucaklayıcı diyaloglar geliştirmek.',
-        'Zorluklar karşısında atalete düşmeyip daima çözüm ve proje odaklı olmak.'
-      ]
-    }
+      id: 6,
+      title: isRTL ? 'البراءة من العصبية والشقاق' : 'Grupçuluk, Irkçılık ve Tefrikaya Ret',
+      desc: isRTL
+        ? 'يحرم قطعاً على الأعضاء ممارسة الحزبية المقيتة، أو العنصرية، أو الغيبة، أو التنازع المفسد.'
+        : 'İslami Davet Vakfı üyeleri kimseye karşı grupçuluk, ayrımcılık, ırkçılık, tefrika, gıybet ve kısır münakaşa yapmaz.',
+    },
+    {
+      id: 7,
+      title: isRTL ? 'الاشتراكات المالية والشفافية' : 'Giriş ve Aylık Düzenli Aidat Taahhüdü',
+      desc: isRTL
+        ? 'يقدم كل عضو رسوم انتساب محددة ويسدد اشتراكه الشهري بانتظام دعماً للمسيرة الوقفية.'
+        : 'Her üyemiz vakfın tüzüğünde belirtilen giriş aidatını ve taahhüt ettiği aylık düzenli aidatını ödeyerek vakfı destekler.',
+    },
+    {
+      id: 8,
+      title: isRTL ? 'الانضباط والامتثال للائحة' : 'Disiplin Kurulu ve Tüzük Denetimi',
+      desc: isRTL
+        ? 'في حال رصد أي مخالفة لأهداف الوقف ومبادئه، يُحال العضو للجنة الانضباط المختصة وفق اللائحة.'
+        : 'Vakfın amaç ve ilkelerine uymayan durumları tespit edilen üyeler, tüzüğe uygun olarak Disiplin Kurulu\'na sevk edilir.',
+    },
+    {
+      id: 9,
+      title: isRTL ? 'الالتزام التام بالمبادئ الوقفية' : 'İlkelere Sadakat ve Tüzük Taahhüdü',
+      desc: isRTL
+        ? 'يوقع كافة الأعضاء على الالتزام الصارم بمبادئ الوقف ومواصلة الدرب بثبات وإخلاص.'
+        : 'İslami Davet Vakfı\'nın üyeleri tüzüğümüzde yer alan tüm ilkelere gönülden bağlı olarak çalışmayı kabul ve taahhüt eder.',
+    },
   ]
 
   return (
-    <div className="bg-[#F7F5F0] min-h-screen pb-20" dir={isRTL ? 'rtl' : 'ltr'}>
-      {/* Page Hero */}
-      <section className="relative bg-[#0F2E2E] py-24 text-white overflow-hidden">
-        <IslamicPattern opacity={0.04} color="white" size={100} />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8">
-          <motion.span
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-[#3D8B8B] font-inter font-semibold uppercase tracking-widest text-xs block mb-3"
-          >
-            {locale === 'ar' ? 'رؤيتنا الاستراتيجية' : 'Stratejik Vizyonumuz'}
-          </motion.span>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="font-amiri font-bold text-4xl sm:text-5xl md:text-6xl text-white mb-6"
-          >
-            {locale === 'ar' ? 'من نحن' : 'Hakkımızda'}
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="font-inter text-white/80 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed"
-          >
-            {locale === 'ar'
-              ? 'مؤسسة مجتمع مدني راسخة تُرشد الإنسانية من خلال أنشطة العلم والإرشاد والدعوة في سبيل الحق، وتعمل وفق رؤية إسلامية معاصرة.'
-              : 'Hakikat yolunda ilim, irşat ve davet faaliyetleriyle insanlığa rehberlik eden, 1952\'den bu yana Asya coğrafyasında kök salmış ve geleneksel değerleri çağdaş yönetişim modelleriyle birleştiren köklü bir sivil toplum kuruluşu.'}
-          </motion.p>
+    <div className="bg-[#080C10] text-[#F0F6FC] min-h-screen pt-[100px] pb-24" dir={isRTL ? 'rtl' : 'ltr'}>
+      {/* Hero Header */}
+      <section className="relative py-16 overflow-hidden border-b border-white/5">
+        <IslamicPattern opacity={0.03} color="#00D4B2" size={90} />
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#00D4B2]/10 border border-[#00D4B2]/20 text-[#00D4B2] text-xs font-semibold uppercase tracking-wider mb-4">
+            <Sparkles className="w-3.5 h-3.5" />
+            {isRTL ? 'المنطلقات والمبادئ التأسيسية' : 'Kurumsal Tüzük & Vizyon'}
+          </span>
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-[#F0F6FC] tracking-tight mb-4">
+            {isRTL ? 'أهدافنا ومبادئنا الراسخة' : 'Amacımız ve Değişmez İlkelerimiz'}
+          </h1>
+          <p className="text-base sm:text-lg text-[#94A3B8] max-w-3xl mx-auto leading-relaxed">
+            {isRTL
+              ? 'تأسس وقف الدعوة الإسلامية الدولي لبناء منظومة دعوية عالمية محكمة، تستمد شرعيتها من الكتاب والسنة وتنطلق بروح الأخوة والاستقلالية.'
+              : 'İslami Davet Vakfı, kişilere bağlı olmaksızın Kur\'an ve Sünnet rehberliğinde sevgi, samimiyet, istişare ve ilmi disiplinle ümmete hizmet etmek amacıyla kurulmuştur.'}
+          </p>
+
+          {/* Navigation Toggle Buttons */}
+          <div className="flex items-center justify-center gap-3 mt-8">
+            <button
+              onClick={() => setActiveTab('purpose')}
+              className={`px-5 py-2.5 rounded-xl font-semibold text-sm transition-all ${
+                activeTab === 'purpose'
+                  ? 'bg-[#00D4B2] text-[#080C10] shadow-[0_0_20px_rgba(0,212,178,0.3)]'
+                  : 'bg-white/[0.04] text-[#94A3B8] hover:text-[#F0F6FC] border border-white/10'
+              }`}
+            >
+              {isRTL ? 'أهداف الوقف (١١ بنداً)' : 'Vakfımızın Amacı (11 Madde)'}
+            </button>
+            <button
+              onClick={() => setActiveTab('principles')}
+              className={`px-5 py-2.5 rounded-xl font-semibold text-sm transition-all ${
+                activeTab === 'principles'
+                  ? 'bg-[#00D4B2] text-[#080C10] shadow-[0_0_20px_rgba(0,212,178,0.3)]'
+                  : 'bg-white/[0.04] text-[#94A3B8] hover:text-[#F0F6FC] border border-white/10'
+              }`}
+            >
+              {isRTL ? 'مبادئنا الأساسية (٩ بنود)' : 'Vakfımızın İlkeleri (9 Madde)'}
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* Section 1: Temel İlkeler */}
-      <section className="py-20 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionTitle
-            tag={locale === 'ar' ? 'المبادئ الأساسية' : 'Temel İlkelerimiz'}
-            title={locale === 'ar' ? 'مؤسسة راسخة في طريق الدعوة' : 'Kurumsal Hafızanın Kurumsallaşması'}
-            align="center"
-            className="mb-16"
-          />
+      {/* Main Content Area */}
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+        
+        {/* TAB 1: AMACIMIZ (11 Madde) */}
+        {activeTab === 'purpose' && (
+          <div id="amacimiz" className="space-y-10">
+            <div className="max-w-2xl">
+              <span className="text-xs font-semibold text-[#00D4B2] uppercase tracking-wider block mb-1">
+                {isRTL ? 'الوثيقة التأسيسية' : 'Resmi Tüzük Maddeleri'}
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#F0F6FC]">
+                {isRTL ? 'الأهداف الاستراتيجية لوقف الدعوة الإسلامية الدولي' : 'Uluslararası İslami Davet Vakfı\'nın Amaçları'}
+              </h2>
+              <p className="text-sm text-[#94A3B8] mt-2">
+                {isRTL
+                  ? 'مستخلصة من الوثيقة الرسمية للوقف المحدثة في أرشيف العمل المؤسسي.'
+                  : 'Vakfın güncel resmi tüzüğünde yer alan ve çalışmalarımıza yön veren 11 temel amaç:'}
+              </p>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {principles.map((pr, idx) => {
-              const Icon = pr.icon
-              return (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {amaclar.map((item, idx) => {
+                const Icon = item.icon
+                return (
+                  <motion.div
+                    key={item.num}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: idx * 0.05 }}
+                    className="glass-card p-6 sm:p-7 relative overflow-hidden group hover:border-[#00D4B2]/40"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-[#00D4B2]/10 border border-[#00D4B2]/20 flex items-center justify-center text-[#00D4B2] shrink-0 font-mono font-bold text-base group-hover:bg-[#00D4B2]/20 transition-all">
+                        {item.num}
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-[#F0F6FC] group-hover:text-[#00D4B2] transition-colors mb-2.5">
+                          {item.title}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-[#94A3B8] leading-[1.8] font-normal">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                )
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* TAB 2: İLKELERİMİZ (9 Madde) */}
+        {activeTab === 'principles' && (
+          <div id="ilkelerimiz" className="space-y-10">
+            <div className="max-w-2xl">
+              <span className="text-xs font-semibold text-[#00D4B2] uppercase tracking-wider block mb-1">
+                {isRTL ? 'ميثاق الشرف الأخلاقي' : 'Vakıf Ahlakı ve Tüzük Şartları'}
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#F0F6FC]">
+                {isRTL ? 'المبادئ التسعة الحاكمة لحركة الوقف' : 'Uluslararası İslami Davet Vakfı\'nın İlkeleri'}
+              </h2>
+              <p className="text-sm text-[#94A3B8] mt-2">
+                {isRTL
+                  ? 'تسري هذه المبادئ على كل عضو منتسب وتحدد ملامح العمل الجماعي المنضبط.'
+                  : 'Vakfımıza üye olan her ferdin benimsediği, tefrikadan uzak durmayı ve daveti hayat tarzı kılmayı emreden 9 temel ilke:'}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {ilkeler.map((item, idx) => (
                 <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 30 }}
+                  key={item.id}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className={`border border-[#E5E2DA] rounded-xl p-8 bg-white hover:shadow-md transition-all duration-200 flex flex-col justify-between ${pr.size}`}
+                  transition={{ duration: 0.4, delay: idx * 0.05 }}
+                  className="glass-card p-6 flex flex-col justify-between group hover:border-[#33DEC5]/40"
                 >
                   <div>
-                    <div className="w-12 h-12 rounded-xl bg-[rgba(27,77,77,0.08)] flex items-center justify-center mb-6 text-[#1B4D4D]">
-                      <Icon className="w-6 h-6" />
+                    <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#00D4B2] font-bold text-sm mb-4">
+                      #{item.id}
                     </div>
-                    <h3 className="font-amiri font-bold text-2xl text-[#1A1A1A] mb-4">{pr.title}</h3>
-                    <p className="font-inter text-[#5C5C5C] text-sm leading-relaxed mb-6">{pr.text}</p>
+                    <h3 className="text-base font-bold text-[#F0F6FC] mb-2.5 group-hover:text-[#00D4B2] transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#94A3B8] leading-[1.75]">
+                      {item.desc}
+                    </p>
                   </div>
-                  <div className="h-1 w-12 bg-[#1B4D4D] rounded-full" />
+
+                  <div className="pt-4 mt-4 border-t border-white/5 flex items-center gap-1.5 text-xs text-[#00D4B2]">
+                    <CheckCircle2 className="w-3.5 h-3.5" />
+                    <span>{isRTL ? 'مبدأ ملزم' : 'Bağlayıcı İlke'}</span>
+                  </div>
                 </motion.div>
-              )
-            })}
+              ))}
+            </div>
           </div>
+        )}
+
+        {/* Tüzük İndir & Kurumsal İletişim Alt Kartı */}
+        <div className="mt-16 glass-panel p-8 sm:p-10 rounded-2xl border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <h3 className="text-xl font-bold text-[#F0F6FC]">
+              {isRTL ? 'الاطلاع على الهيكل التنظيمي واللجان' : 'Vakfımızın Yönetim ve Kurul Yapısını İnceleyin'}
+            </h3>
+            <p className="text-sm text-[#94A3B8] mt-1 max-w-xl">
+              {isRTL
+                ? 'تعرف على مجلس الإدارة، وهيئة الرقابة، والمجلس الاستشاري، ولجان التحكيم والانضباط.'
+                : 'Yönetim Kurulu, Denetim Kurulu, İstişare Kurulu ve Tahkim Heyeti üyelerimizi ayrıntılı olarak görüntüleyebilirsiniz.'}
+            </p>
+          </div>
+          <Link
+            href="/organizasyon"
+            className="btn-turquoise shrink-0"
+          >
+            <span>{isRTL ? 'الهيكل الإداري' : 'Yönetim ve Kurullarımız'}</span>
+            <ArrowRight className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''}`} />
+          </Link>
         </div>
-      </section>
 
-      {/* Section 2: Yönetişim Modeli */}
-      <section className="py-20 bg-[#0F2E2E] text-white relative overflow-hidden">
-        <IslamicPattern opacity={0.03} color="white" size={120} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
-            <span className="font-inter text-[#3D8B8B] font-semibold uppercase tracking-widest text-xs">
-              {locale === 'ar' ? 'الشورى والعمل الجماعي' : 'Yönetişim & Kolektif Akıl'}
-            </span>
-            <h2 className="font-amiri font-bold text-3xl sm:text-4xl mt-2 text-white">
-              {locale === 'ar' ? 'نموذج الحوكمة المرن' : 'Çevik Yönetişim ve Kolektif Akıl'}
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {governance.map((gov, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, scale: 0.98 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="bg-white/5 border border-white/10 rounded-xl p-8 hover:bg-white/10 transition-all duration-200"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white font-amiri font-bold flex-shrink-0 mt-1">
-                    {idx + 1}
-                  </div>
-                  <div>
-                    <h3 className="font-amiri font-bold text-xl text-white mb-2">{gov.title}</h3>
-                    <p className="font-inter text-white/70 text-sm leading-relaxed">{gov.desc}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Section 3: Üye Vasıfları Accordion */}
-      <section className="py-20 bg-[#F7F5F0] relative">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="font-inter text-[#2D6A6A] font-semibold uppercase tracking-widest text-xs">
-              {locale === 'ar' ? 'خصائص الأعضاء' : 'Kurumsal Kültür & Değerler'}
-            </span>
-            <h2 className="font-amiri font-bold text-3xl sm:text-4xl mt-2 text-[#1A1A1A]">
-              {locale === 'ar' ? 'صفات ومعايير أعضاء الوقف' : 'İSDAV Üyelerinin Vasıfları'}
-            </h2>
-          </div>
-
-          <div className="space-y-4">
-            {memberTraits.map((category, idx) => {
-              const isOpen = activeAccordion === idx
-              return (
-                <div
-                  key={idx}
-                  className="bg-white border border-[#E5E2DA] rounded-xl overflow-hidden shadow-sm transition-all"
-                >
-                  <button
-                    onClick={() => setActiveAccordion(isOpen ? null : idx)}
-                    className="w-full p-6 text-left flex items-center justify-between font-amiri font-bold text-xl text-[#1A1A1A] hover:bg-[#F7F5F0] transition-colors"
-                  >
-                    <span>{category.category}</span>
-                    <ChevronDown className={`w-5 h-5 text-[#1B4D4D] transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
-                  </button>
-
-                  {isOpen && (
-                    <div className="p-6 pt-0 border-t border-[#E5E2DA] mt-2">
-                      <ul className="space-y-3 pt-4">
-                        {category.items.map((item, itemIdx) => (
-                          <li key={itemIdx} className="flex items-start gap-3 text-sm text-[#5C5C5C] font-inter">
-                            <CheckCircle2 className="w-4 h-4 text-[#1B4D4D] flex-shrink-0 mt-0.5" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
+      </div>
     </div>
   )
 }

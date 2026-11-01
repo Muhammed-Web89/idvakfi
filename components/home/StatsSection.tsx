@@ -1,116 +1,122 @@
 'use client'
 
+import React from 'react'
 import { motion } from 'framer-motion'
-import { useTranslations, useLocale } from 'next-intl'
+import { useLocale } from 'next-intl'
+import { Globe, Users, Calendar, Award, Sparkles } from 'lucide-react'
 import AnimatedCounter from '@/components/ui/AnimatedCounter'
-import IslamicPattern from '@/components/ui/IslamicPattern'
 
 export default function StatsSection() {
-  const t = useTranslations('impact')
   const locale = useLocale()
-  const isRTL = locale === 'ar'
+  const isAR = locale === 'ar'
 
-  const impactCards = [
+  const stats = [
     {
-      value: 11000,
+      id: 'languages',
+      icon: Globe,
+      target: 15,
       suffix: '+',
-      title: t('koreaTitle'),
-      subtitle: t('koreaSubtitle'),
-      desc: t('koreaDesc'),
+      title: isAR ? 'لغة حية في الدعوة' : 'Dilde Küresel Davet',
+      desc: isAR
+        ? 'برامج دعوية وترجمات في آسيا وأوروبا والشرق الأوسط'
+        : 'İngilizce başta olmak üzere 15 dilde tebliğ ve yayın faaliyeti',
     },
     {
-      value: 100000,
+      id: 'board',
+      icon: Users,
+      target: 40,
       suffix: '+',
-      title: t('japanTitle'),
-      subtitle: t('japanSubtitle'),
-      desc: t('japanDesc'),
+      title: isAR ? 'عضو في الهيئات القيادية' : 'Yönetim ve İstişare Heyeti',
+      desc: isAR
+        ? 'نخبة من العلماء، الأكاديميين، الحقوقيين ورجال الأعمال'
+        : 'Akademisyenler, hukukçular, iş insanları ve ilim ehli kadro',
     },
     {
-      value: 401,
+      id: 'congress',
+      icon: Calendar,
+      target: 4,
       suffix: '',
-      title: t('mosquesTitle'),
-      subtitle: t('mosquesSubtitle'),
-      desc: t('mosquesDesc'),
+      title: isAR ? 'مؤتمرات استشارية دولية' : 'Büyük İstişare Kongresi',
+      desc: isAR
+        ? 'جلسات دورية لإقرار السياسات ورسم خطط العمل المشترك'
+        : 'Ümmetin birliği gündemiyle icra edilen sonuç raporlu kongreler',
     },
     {
-      value: 1740,
+      id: 'experience',
+      icon: Award,
+      target: 20,
       suffix: '+',
-      title: t('membersTitle'),
-      subtitle: t('membersSubtitle'),
-      desc: t('membersDesc'),
+      title: isAR ? 'عاماً من العطاء والخبرة' : 'Yıllık İlim & Hizmet Mirası',
+      desc: isAR
+        ? 'امتداد تاريخي راسخ يجمع بين الأصالة والمعاصرة'
+        : 'Kurumsal hafıza, davetçi yetiştirme ve sivil toplum birikimi',
     },
   ]
 
   return (
-    <section
-      className="bg-[#0F2E2E] py-[80px] sm:py-[100px] text-white relative overflow-hidden"
-      aria-label="Etki Alanlarımız"
-      dir={isRTL ? 'rtl' : 'ltr'}
-    >
-      {/* Subtle Islamic pattern */}
-      <IslamicPattern opacity={0.04} color="#FFFFFF" size={80} />
+    <section className="py-20 relative overflow-hidden bg-[#0A0E14] border-y border-white/5" dir={isAR ? 'rtl' : 'ltr'}>
+      {/* Background soft ambient radial light */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[300px] bg-[#00D4B2]/05 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="relative max-w-[1240px] mx-auto px-4 sm:px-8">
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Header (Title + Subtitle) */}
-        <div className="text-center mb-[60px]">
-          <span className="font-inter text-[12px] font-semibold tracking-[0.1em] text-white/50 uppercase">
-            {t('tag')}
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00D4B2]/10 border border-[#00D4B2]/20 text-[#00D4B2] text-xs font-semibold uppercase tracking-wider mb-3">
+            <Sparkles className="w-3.5 h-3.5" />
+            {isAR ? 'بالأرقام والوقائع' : 'Sayılarla Vakfımız'}
           </span>
-          <h2 className="font-amiri text-[32px] sm:text-[36px] font-bold text-white mt-3">
-            {t('title')}
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#F0F6FC] tracking-tight">
+            {isAR ? 'أثر ملموس في خدمة الأمة والإنسانية' : 'Sahadaki Gerçek Gücümüz ve Etki Alanımız'}
           </h2>
-          <p className="font-inter text-[16px] sm:text-[17px] font-normal text-white/70 mt-2 max-w-xl mx-auto">
-            {t('subtitle')}
+          <p className="mt-2.5 text-sm sm:text-base text-[#94A3B8]">
+            {isAR
+              ? 'أرقام حقيقية تعكس ثمار الإخلاص والعمل المؤسسي المنظم.'
+              : 'İstişare, ilim ve fedakarlıkla büyüyen kurumsal davet hareketimiz.'}
           </p>
         </div>
 
-        {/* 4 Impact Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 text-center">
-          {impactCards.map((card, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.7, delay: index * 0.12, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="flex flex-col items-center px-4 sm:px-6 relative"
-            >
-              {/* Stat Number (Amiri 44px 700 with dotted format) */}
-              <div className="font-amiri text-[44px] font-bold text-white leading-none">
-                <AnimatedCounter
-                  target={card.value}
-                  suffix={card.suffix}
-                  duration={2500}
-                  formatThousands={true}
-                />
-              </div>
+        {/* 4 Counter Grid in Glassmorphic Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {stats.map((item, index) => {
+            const Icon = item.icon
+            return (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="glass-card p-6 sm:p-7 relative overflow-hidden group flex flex-col justify-between"
+              >
+                {/* Top Icon with Subtle Glow */}
+                <div className="flex items-center justify-between mb-5">
+                  <div className="w-12 h-12 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#00D4B2] group-hover:scale-105 group-hover:border-[#00D4B2]/40 group-hover:bg-[#00D4B2]/10 transition-all duration-300">
+                    <Icon className="w-6 h-6" />
+                  </div>
+                  <div className="w-2 h-2 rounded-full bg-[#00D4B2]/40 group-hover:bg-[#00D4B2] group-hover:shadow-[0_0_8px_#00D4B2] transition-all" />
+                </div>
 
-              {/* Title (Inter 18px 600) */}
-              <h3 className="font-inter text-[18px] font-semibold text-white mt-3 leading-snug">
-                {card.title}
-              </h3>
-
-              {/* Subtitle (Inter 14px 500 italic #3D8B8B) */}
-              <p className="font-inter text-[14px] font-medium text-[#3D8B8B] italic mt-1">
-                {card.subtitle}
-              </p>
-
-              {/* Description (Inter 14px 400, max-w 260px, color white/65) */}
-              <p className="font-inter text-[14px] font-normal leading-[1.6] text-white/65 max-w-[260px] mx-auto mt-2">
-                {card.desc}
-              </p>
-
-              {/* Vertical divider (1px, height 80px, background rgba(255,255,255,0.1)) */}
-              {index < impactCards.length - 1 && (
-                <div
-                  className={`hidden lg:block absolute top-1/2 -translate-y-1/2 w-[1px] h-[80px] bg-white/10 ${
-                    isRTL ? 'left-0' : 'right-0'
-                  }`}
-                />
-              )}
-            </motion.div>
-          ))}
+                {/* Counter Metric */}
+                <div>
+                  <div className="text-3xl sm:text-4xl font-extrabold text-[#F0F6FC] tracking-tight mb-2">
+                    <AnimatedCounter
+                      target={item.target}
+                      suffix={item.suffix}
+                      duration={2000}
+                      className="text-[#00D4B2]"
+                    />
+                  </div>
+                  <h3 className="text-base font-semibold text-[#F0F6FC] mb-2 leading-snug">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-[#94A3B8] leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              </motion.div>
+            )
+          })}
         </div>
 
       </div>

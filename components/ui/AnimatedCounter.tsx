@@ -38,10 +38,22 @@ export default function AnimatedCounter({
           hasAnimated.current = true
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.05, rootMargin: '150px' }
     )
     if (ref.current) observer.observe(ref.current)
-    return () => observer.disconnect()
+
+    // Fallback timer: ensure it counts up even if screenshot or fast render doesn't trigger scroll
+    const fallbackTimer = setTimeout(() => {
+      if (!hasAnimated.current) {
+        setIsVisible(true)
+        hasAnimated.current = true
+      }
+    }, 800)
+
+    return () => {
+      observer.disconnect()
+      clearTimeout(fallbackTimer)
+    }
   }, [])
 
   useEffect(() => {

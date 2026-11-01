@@ -1,39 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
-@theme {
-  --color-primary-green: #1B4D4D;
-  --color-primary-green-light: #2D6A6A;
-  --color-primary-green-dark: #0F2E2E;
-  --color-primary-green-muted: #3D8B8B;
-  
-  --color-bg-cream: #F7F5F0;
-  --color-bg-white: #FFFFFF;
-
-  --color-text-primary: #1A1A1A;
-  --color-text-secondary: #5C5C5C;
-  --color-text-muted: #8A8A8A;
-
-  --color-border-light: #E5E2DA;
-  --color-border-green: #2D6A6A;
-
-  --font-amiri: 'Amiri', serif, Georgia, 'Times New Roman';
-  --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-arabic: 'Noto Naskh Arabic', 'Amiri', serif;
-}
-
 :root {
-  --primary-green: #1B4D4D;
-  --primary-green-light: #2D6A6A;
-  --primary-green-dark: #0F2E2E;
-  --primary-green-muted: #3D8B8B;
-  --bg-cream: #F7F5F0;
-  --bg-white: #FFFFFF;
-  --text-primary: #1A1A1A;
-  --text-secondary: #5C5C5C;
-  --text-muted: #8A8A8A;
-  --border-light: #E5E2DA;
-  --border-green: #2D6A6A;
+  --color-dark-bg: #080C10;
+  --color-dark-surface: #0D1117;
+  --color-dark-card: #121820;
+  --color-dark-border: rgba(255, 255, 255, 0.08);
+
+  --color-turquoise: #00D4B2;
+  --color-turquoise-light: #33DEC5;
+  --color-turquoise-glow: rgba(0, 212, 178, 0.25);
+
+  --color-text-primary: #F0F6FC;
+  --color-text-secondary: #94A3B8;
+  --color-text-muted: #64748B;
 
   --font-amiri: 'Amiri', serif, Georgia, 'Times New Roman';
   --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
@@ -42,18 +22,26 @@
 
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 body {
-  background-color: var(--bg-cream);
-  color: var(--text-primary);
+  background-color: #080C10;
+  color: #F0F6FC;
   font-family: var(--font-inter);
+  line-height: 1.75;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 /* Typography Utility Classes */
-h1, h2, h3, h4, .font-amiri {
+h1, h2, h3, h4, .font-heading {
+  font-family: var(--font-inter);
+  letter-spacing: -0.02em;
+}
+
+.font-amiri {
   font-family: var(--font-amiri);
 }
 
@@ -61,105 +49,127 @@ h1, h2, h3, h4, .font-amiri {
   font-family: var(--font-inter);
 }
 
-/* Buttons (Strict Specification) */
-.btn-primary-white {
-  background-color: #FFFFFF;
-  color: #1B4D4D;
+/* Glassmorphism Design Language */
+.glass-panel {
+  background: rgba(18, 24, 32, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(0, 212, 178, 0.4);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.5), 0 0 24px 0 rgba(0, 212, 178, 0.15);
+}
+
+.glass-card-active {
+  background: rgba(0, 212, 178, 0.08);
+  border-color: rgba(0, 212, 178, 0.5);
+  box-shadow: 0 0 25px rgba(0, 212, 178, 0.2);
+}
+
+/* Turquoise Glow Buttons */
+.btn-turquoise {
+  background: #00D4B2;
+  color: #080C10;
   font-family: var(--font-inter);
   font-weight: 600;
   font-size: 15px;
   padding: 12px 28px;
-  border-radius: 8px;
-  transition: all 0.2s ease-in-out;
+  border-radius: 10px;
+  transition: all 0.25s ease;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  border: 1px solid transparent;
-}
-.btn-primary-white:hover {
-  background-color: #F7F5F0;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 18px rgba(0, 212, 178, 0.3);
 }
 
-.btn-secondary-transparent {
-  background-color: transparent;
-  color: #FFFFFF;
+.btn-turquoise:hover {
+  background: #33DEC5;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0, 212, 178, 0.45);
+}
+
+.btn-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #F0F6FC;
   font-family: var(--font-inter);
   font-weight: 500;
   font-size: 15px;
   padding: 12px 28px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  transition: all 0.2s ease-in-out;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.25s ease;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
 }
-.btn-secondary-transparent:hover {
-  border-color: rgba(255, 255, 255, 0.8);
-  background-color: rgba(255, 255, 255, 0.08);
-  transform: translateY(-1px);
+
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(0, 212, 178, 0.6);
+  color: #00D4B2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-.btn-green {
-  background-color: #1B4D4D;
-  color: #FFFFFF;
-  font-family: var(--font-inter);
-  font-weight: 600;
-  font-size: 14px;
-  padding: 10px 22px;
-  border-radius: 6px;
+/* Glass inputs */
+.glass-input {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #F0F6FC;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 15px;
   transition: all 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.btn-green:hover {
-  background-color: #2D6A6A;
+  width: 100%;
 }
 
-/* Card Utility */
-.card-standard {
-  background-color: #FFFFFF;
-  border: 1px solid #E5E2DA;
-  border-radius: 12px;
-  transition: all 0.2s ease;
-}
-.card-standard:hover {
-  border-color: #2D6A6A;
-  box-shadow: 0 8px 24px rgba(27, 77, 77, 0.08);
+.glass-input:focus {
+  outline: none;
+  border-color: #00D4B2;
+  box-shadow: 0 0 15px rgba(0, 212, 178, 0.25);
+  background: rgba(255, 255, 255, 0.06);
 }
 
-/* Dark Card Utility */
-.card-dark {
-  background-color: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  transition: all 0.2s ease;
+.glass-input::placeholder {
+  color: #64748B;
 }
-.card-dark:hover {
-  border-color: rgba(61, 139, 139, 0.4);
-  background-color: rgba(255, 255, 255, 0.07);
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #080C10;
+}
+::-webkit-scrollbar-thumb {
+  background: #1F2937;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00D4B2;
 }
 
 /* Accessible focus ring */
 a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
-  outline: 2px solid #3D8B8B;
+  outline: 2px solid #00D4B2;
   outline-offset: 2px;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #F7F5F0;
-}
-::-webkit-scrollbar-thumb {
-  background: #2D6A6A;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #1B4D4D;
 }
